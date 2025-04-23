@@ -16,18 +16,18 @@ from webdriver_manager.chrome import ChromeDriverManager
 import os
 scraped_data1 = []
 # API Keys & Configs 🔑
-GOOGLE_API_KEY = "AIzaSyBVo_s3RNhwolpj2SnJHlbAvUES-YBM2Ic"
-CSE_ID = "b3ee74b6f109d4785"
-LLM_API_URL = "https://api.together.xyz/v1/chat/completions"
+GOOGLE_API_KEY = ""
+CSE_ID = ""
+LLM_API_URL = ""
 HEADERS = {
-    "Authorization": "Bearer 542255a9ab6e90c86b0bace418f9d0185b0f989c539e7cc1387232144757ed71",
+    "Authorization": "Bearer ",
     "Content-Type": "application/json"
 }
 
 # 🔍 Use Google Custom Search to get results from a specific site
 def scrape_with_google(query, site, max_results=5):
     results = []
-    search_url = "https://www.googleapis.com/customsearch/v1"
+    search_url = ""
     params = {
         "key": GOOGLE_API_KEY,
         "cx": CSE_ID,
