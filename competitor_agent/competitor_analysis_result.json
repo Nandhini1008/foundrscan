@@ -1,0 +1,117 @@
+{
+  "competitors": [
+    {
+      "name": "Carbon Health",
+      "description": "Operator of mobile-based healthcare networks and clinics",
+      "website": "www.carbonhealth.com",
+      "features": [
+        "Mobile-based healthcare networks and clinics"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$945M",
+      "details": {
+        "type": "Other Healthcare Technology Systems",
+        "employees": "",
+        "location": "300 California Street",
+        "investors": [],
+        "status": "",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    },
+    {
+      "name": "Everly Health",
+      "description": "Operator of an integrated digital care platform",
+      "website": "www.everlyhealth.com",
+      "features": [
+        "Integrated digital care platform"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$500M",
+      "details": {
+        "type": "Laboratory Services (Healthcare)",
+        "employees": "",
+        "location": "823 Congress Avenue, 12th Floor",
+        "investors": [],
+        "status": "",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    },
+    {
+      "name": "Practo",
+      "description": "Developer of an online doctor consultation platform",
+      "website": "www.practo.com",
+      "features": [
+        "Online doctor consultation platform"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$241M",
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "",
+        "location": "3rd Block, 371, 1st Cross Road",
+        "investors": [],
+        "status": "",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    },
+    {
+      "name": "MediBuddy",
+      "description": "Developer of a medical consultation application",
+      "website": "www.medibuddy.in",
+      "features": [
+        "Medical consultation application"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$208M",
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "2,000",
+        "location": "Tower C, 4th Floor",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Debt",
+        "deal_amount": "$8.4M"
+      }
+    }
+  ],
+  "top_competitors": [
+    {
+      "name": "Carbon Health",
+      "funding": "$945M",
+      "description": "Operator of mobile-based healthcare networks and clinics",
+      "type": "Other Healthcare Technology Systems",
+      "employees": "",
+      "key_achievements": [
+        "Raised $945M in funding",
+        "Expanded healthcare services"
+      ]
+    },
+    {
+      "name": "Everly Health",
+      "funding": "$500M",
+      "description": "Operator of an integrated digital care platform",
+      "type": "Laboratory Services (Healthcare)",
+      "employees": "",
+      "key_achievements": [
+        "Raised $500M in funding",
+        "Developed integrated digital care platform"
+      ]
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$1.5B",
+    "growth_rate": "10%",
+    "key_trends": [
+      "Digital health services",
+      "Telemedicine"
+    ]
+  },
+  "score": "8",
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Integration with digital health platforms"
+  ]
+}
