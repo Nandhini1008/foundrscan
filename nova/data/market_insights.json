@@ -1,0 +1,30 @@
+{
+  "industry": "Education",
+  "market_trend": "Growing demand for online education platforms, with a CAGR of 14% from 2022 to 2032",
+  "TAM_SAM_SOM": {
+    "TAM": "$399.3 billion (2022)",
+    "SAM": "$245.5 billion (2022)",
+    "SOM": "$18 billion (2022)"
+  },
+  "customer_segments": [
+    "College students looking for internships and practical skills training",
+    "Employers seeking skilled and experienced interns",
+    "Parents and guardians looking for education and career opportunities for their children"
+  ],
+  "pricing_opportunity": "Subscription-based pricing, with discounts for bulk purchases and referrals",
+  "market_opportunities": [
+    "Growing demand for online education platforms",
+    "Increasing adoption of AI in education",
+    "Growing need for practical skills and real-world experience"
+  ],
+  "market_risks": [
+    "Competition from established online education platforms",
+    "Quality of courses and internships",
+    "Scalability and infrastructure challenges"
+  ],
+  "recent_investments": [
+    "Coursera raised $130 million in Series F funding from investors including NEA and GGV Capital (2022)",
+    "Udemy raised $50 million in Series F funding from investors including Insight Venture Partners and General Catalyst (2022)",
+    "Pluralsight raised $150 million in Series F funding from investors including Insight Venture Partners and General Catalyst (2022)"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Education for College Students",
+  "description": "A platform that provides online courses and internships to college students, with a focus on practical skills and real-world experience",
+  "target_users": [
+    "college students"
+  ],
+  "problem": "College students are often scammed by companies offering fake internships, and they lack practical skills and real-world experience",
+  "solution": "The platform offers legitimate internships and courses, with a focus on practical skills and real-world experience, and provides feedback and support to students",
+  "tech_stack": [],
+  "business_model": "The platform generates revenue through course fees, and offers a 'friends combo' discount for students who sign up with their friends",
+  "monetization": "Course fees, 'friends combo' discount",
+  "competition": "Other online education platforms",
+  "differentiator": "Focus on practical skills and real-world experience, and personalized support and feedback",
+  "risks": [
+    "Scalability",
+    "Quality of courses and internships"
+  ],
+  "vision": "To provide high-quality education and job opportunities to college students, and to become a leading online education platform"
+}
