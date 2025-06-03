@@ -1,5 +1,3 @@
-
-
 from typing import Dict, List, Optional, Tuple, Union
 from dataclasses import dataclass
 import json
@@ -60,7 +58,17 @@ class StartupIdeaAnalyzer:
     def __init__(self):
         """Initialize the analyzer with Together AI client"""
         try:
-            self.client = Together()
+            # Load environment variables from .env file
+            load_dotenv(override=True)
+            
+            # Get API key from environment variable
+            api_key = os.getenv("TOGETHER_API_KEY")
+            logger.info(f"API Key found: {'Yes' if api_key else 'No'}")
+            
+            if not api_key:
+                raise ValueError("TOGETHER_API_KEY environment variable is not set. Please check your .env file.")
+                
+            self.client = Together(api_key=api_key)
             logger.info("Successfully initialized Together AI client")
         except Exception as e:
             logger.error(f"Failed to initialize Together AI client: {str(e)}")
@@ -112,13 +120,14 @@ Your task is to:
 If the input is too vague, ask your first clarifying question: "Can you tell me more about what the startup does, who it helps, and how it works?"
 """
 
-    def query_model(self, prompt: str, conversation_history: str = "") -> str:
+    def query_model(self, prompt: str, conversation_history: str = "", stream: bool = False) -> str:
         """
         Query the AI model with proper error handling and retries
         
         Args:
             prompt: The user's input prompt
             conversation_history: Previous conversation context
+            stream: Whether to stream the response
             
         Returns:
             The model's response as a string
@@ -143,10 +152,21 @@ If the input is too vague, ask your first clarifying question: "Can you tell me 
 
             response = self.client.chat.completions.create(
                 model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
-                messages=messages
+                messages=messages,
+                stream=stream
             )
 
-            return response.choices[0].message.content.strip()
+            if stream:
+                full_response = ""
+                for chunk in response:
+                    if hasattr(chunk.choices[0].delta, 'content'):
+                        content = chunk.choices[0].delta.content
+                        if content:
+                            full_response += content
+                            print(content, end='', flush=True)
+                return full_response
+            else:
+                return response.choices[0].message.content.strip()
 
         except Exception as e:
             logger.error(f"Error querying model: {str(e)}")
