@@ -1,0 +1,24 @@
+{
+  "startup_name": "SwasthyaLink",
+  "one_liner": "Bringing affordable telemedicine access to rural India.",
+  "problem_statement": "Rural communities lack timely access to quality healthcare due to doctor shortages and geographical barriers.",
+  "solution_summary": "SwasthyaLink is a mobile-first telemedicine platform that connects rural patients with certified doctors via low-bandwidth video and voice calls.",
+  "product_type": "mobile app + cloud platform",
+  "target_customer": "Patients in rural and semi-urban areas with limited access to healthcare.",
+  "customer_pain_points": [
+    "Lack of nearby medical professionals",
+    "High cost and effort of traveling for checkups",
+    "Language and literacy barriers in navigating healthcare"
+  ],
+  "key_features": [
+    "Low-data teleconsultations",
+    "Regional language support",
+    "Health records digitization",
+    "AI triage assistant for symptom pre-check"
+  ],
+  "unique_selling_point": "Localized, low-cost telehealth with AI support tailored for underserved areas.",
+  "stage": "MVP deployed in pilot villages",
+  "founder_background": "Social-impact driven team with backgrounds in public health, rural outreach, and tech.",
+  "long_term_vision": "To build India’s largest rural health network and reduce preventable rural deaths by 70%.",
+  "why_now": "Post-COVID push for digital health, increased smartphone penetration, and government support for rural telemedicine create a unique opportunity."
+}

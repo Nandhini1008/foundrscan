@@ -1,6 +1,474 @@
 [
     {
+<<<<<<< HEAD
         "company_name": "MediBuddy (formerly docsapp)",
+=======
+        "company_name": "Bicycle Health",
+        "searched_url": "https://pitchbook.com/profiles/company/432739-72",
+        "details": {
+            "Description": "Developer of a digital health platform designed to provide accessible, confidential, and evidence-based treatment for opioid use disorder. The company's platform offers virtual care with personalized medication management, behavioral health treatment, and peer support, enabling patients with opioid use disorder to access affordable treatment and regain control of their lives.",
+            "Website": "www.bicyclehealth.com",
+            "Ownership Status": "Privately Held (backing)",
+            "Financing Status": "Venture Capital-Backed",
+            "Primary Industry": "Other Healthcare Technology Systems",
+            "Other Industries": "Clinics/Outpatient Services",
+            "Vertical(s)": "Digital Health,\nHealthTech",
+            "Address": [
+                "68 Harrison Avenue",
+                "Suite 600",
+                "Boston, MA 02111",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/bicyclehealth",
+                "Twitter": "https://twitter.com/bicyclehealth",
+                "Facebook": "https://www.facebook.com/bicyclehealth"
+            },
+            "Industries": [
+                "Other Healthcare Technology Systems"
+            ],
+            "Verticals": [
+                "www.git h.com",
+                "Digital Health",
+                "HealthTech"
+            ],
+            "When was Bicycle Health founded?": "Bicycle Health was founded in 2017.",
+            "Where is Bicycle Health headquartered?": "Bicycle Health is headquartered in Boston, MA.",
+            "What is the size of Bicycle Health?": "Bicycle Health has 193 total employees.",
+            "What industry is Bicycle Health in?": "Bicycle Health’s primary industry is Other Healthcare Technology Systems.",
+            "Is Bicycle Health a private or public company?": "Bicycle Health is a Private company.",
+            "What is Bicycle Health’s current revenue?": "The current revenue for Bicycle Health is  .",
+            "How much funding has Bicycle Health raised over time?": "Bicycle Health has raised $104M.",
+            "Who are Bicycle Health’s investors?": "JSL Health Capital, Valeo Ventures, Cobalt Ventures (Private Equity), InterAlpen Partners, and Romulus Capital are 5 of 17 investors who have invested in Bicycle Health.",
+            "Who are Bicycle Health’s competitors?": "Boulder (Clinics/Outpatient Services), Workit Health, Eleanor Health, AngelEye Health, and cliexa are some of the 7 competitors of Bicycle Health."
+        }
+    },
+    {
+        "company_name": "Forge Health",
+        "searched_url": "https://pitchbook.com/profiles/company/166292-11",
+        "details": {
+            "Year Founded": "2016",
+            "Status": "Private",
+            "Employees": "166",
+            "Latest Deal Type": "Series B",
+            "Latest Deal Amount": "$26.6M",
+            "Investors": "4",
+            "Description": "Provider of evidence-based outpatient care intended for substance use, mental health, or trauma issues. The company's services are delivered virtually or at in-person clinics and offer a chronic care management approach to patient care that allows for more intensive visits to address underlying issues, enabling patients to foster deeper relationships and forge long-term health.",
+            "Website": "www.forgehealth.com",
+            "Formerly Known As": "VFR Healthcare, Strive Care",
+            "Ownership Status": "Privately Held (backing)",
+            "Financing Status": "Venture Capital-Backed",
+            "Primary Industry": "Clinics/Outpatient Services",
+            "Other Industries": "Other Healthcare Services",
+            "Vertical(s)": "HealthTech",
+            "Address": [
+                "1133 Westchester Avenue",
+                "Suite N-006",
+                "White Plains, NY 10605",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/forge-health",
+                "Twitter": "https://twitter.com/forge_health",
+                "Facebook": "https://www.facebook.com/ForgeYourHealth"
+            },
+            "Industries": [
+                "Clinics/Outpatient Services"
+            ],
+            "Verticals": [
+                "www.forgehealth.com",
+                "HealthTech"
+            ],
+            "When was Forge Health founded?": "Forge Health was founded in 2016.",
+            "Where is Forge Health headquartered?": "Forge Health is headquartered in White Plains, NY.",
+            "What is the size of Forge Health?": "Forge Health has 166 total employees.",
+            "What industry is Forge Health in?": "Forge Health’s primary industry is Clinics/Outpatient Services.",
+            "Is Forge Health a private or public company?": "Forge Health is a Private company.",
+            "What is the current valuation of Forge Health?": "The current valuation of Forge Health is .",
+            "What is Forge Health’s current revenue?": "The current revenue for Forge Health is  .",
+            "How much funding has Forge Health raised over time?": "Forge Health has raised $48.1M.",
+            "Who are Forge Health’s investors?": "MFO Ventures, HC9 Ventures, Montage Ventures, and Rsquared have invested in Forge Health.",
+            "Who are Forge Health’s competitors?": "First Stop Health, Included Health, DispatchHealth, SonderMind, and Alma (Clinics/Outpatient Services) are some of the 41 competitors of Forge Health."
+        }
+    },
+    {
+        "company_name": "Everly Health",
+        "searched_url": "https://pitchbook.com/profiles/company/157526-11",
+        "details": {
+            "Description": "Operator of an integrated digital care platform intended to provide modern diagnostics-driven care. The company offers an at-home full testing experience with the support of a national clinician network that's composed of physicians, nurses, genetic counselors, and member care specialists, enabling consumers and businesses to have access to convenient, comprehensive health testing.",
+            "Website": "www.everlyhealth.com",
+            "Ownership Status": "Privately Held (backing)",
+            "Financing Status": "Venture Capital-Backed",
+            "Primary Industry": "Laboratory Services (Healthcare)",
+            "Other Industries": "Other Healthcare Services",
+            "Vertical(s)": "LOHAS & Wellness,\nHealthTech",
+            "Address": [
+                "823 Congress Avenue, 12th Floor",
+                "Suite 1200",
+                "Austin, TX 78701",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/everlyhealth",
+                "Twitter": "https://twitter.com/everly_well"
+            },
+            "Industries": [
+                "Laboratory Services (Healthcare)"
+            ],
+            "Verticals": [
+                "www.everlyhealth.com",
+                "LOHAS & Wellness",
+                "HealthTech"
+            ],
+            "When was Everly Health founded?": "Everly Health was founded in 2015.",
+            "Where is Everly Health headquartered?": "Everly Health is headquartered in Austin, TX.",
+            "What is the size of Everly Health?": "Everly Health has 339 total employees.",
+            "What industry is Everly Health in?": "Everly Health’s primary industry is Laboratory Services (Healthcare).",
+            "Is Everly Health a private or public company?": "Everly Health is a Private company.",
+            "What is the current valuation of Everly Health?": "The current valuation of Everly Health is .",
+            "What is Everly Health’s current revenue?": "The current revenue for Everly Health is  .",
+            "How much funding has Everly Health raised over time?": "Everly Health has raised $500M.",
+            "Who are Everly Health’s investors?": "Cerity Partners Ventures, Halogen Ventures, Hurt Family Investments, MicroVentures, and Prysm Capital are 5 of 35 investors who have invested in Everly Health.",
+            "Who are Everly Health’s competitors?": "Thriva, Quest Diagnostics, CashLabs, CCRM Management Company, and Progyny are some of the 20 competitors of Everly Health."
+        }
+    },
+    {
+        "company_name": "Boulder Care",
+        "searched_url": "https://pitchbook.com/profiles/company/235059-58",
+        "details": {
+            "Description": "Operator of a digital health platform intended to provide access to treatment for substance abuse. The company's platform offers patients access to a variety of behavioral therapies, medications, and social support safely and privately at home, enabling patients to get multimodal treatment for opiate use.",
+            "Website": "www.boulder.care",
+            "Ownership Status": "Privately Held (backing)",
+            "Financing Status": "Venture Capital-Backed",
+            "Primary Industry": "Clinics/Outpatient Services",
+            "Other Industries": "Application Software",
+            "Vertical(s)": "LOHAS & Wellness,\nDigital Health,\nHealthTech",
+            "Address": [
+                "111 Southwest Naito Parkway",
+                "Suite 200",
+                "Portland, OR 97204",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/boulder",
+                "Twitter": "https://twitter.com/bouldercare",
+                "Facebook": "https://www.facebook.com/BoulderCare"
+            },
+            "Industries": [
+                "Clinics/Outpatient Services"
+            ],
+            "Verticals": [
+                "www.boulder.care",
+                "LOHAS & Wellness",
+                "Digital Health",
+                "HealthTech"
+            ],
+            "When was Boulder (Clinics/Outpatient Services) founded?": "Boulder (Clinics/Outpatient Services) was founded in 2017.",
+            "Where is Boulder (Clinics/Outpatient Services) headquartered?": "Boulder (Clinics/Outpatient Services) is headquartered in Portland, OR.",
+            "What is the size of Boulder (Clinics/Outpatient Services)?": "Boulder (Clinics/Outpatient Services) has 145 total employees.",
+            "What industry is Boulder (Clinics/Outpatient Services) in?": "Boulder (Clinics/Outpatient Services)’s primary industry is Clinics/Outpatient Services.",
+            "Is Boulder (Clinics/Outpatient Services) a private or public company?": "Boulder (Clinics/Outpatient Services) is a Private company.",
+            "What is the current valuation of Boulder (Clinics/Outpatient Services)?": "The current valuation of Boulder (Clinics/Outpatient Services) is .",
+            "What is Boulder (Clinics/Outpatient Services)’s current revenue?": "The current revenue for Boulder (Clinics/Outpatient Services) is   .",
+            "How much funding has Boulder (Clinics/Outpatient Services) raised over time?": "Boulder (Clinics/Outpatient Services) has raised $85.7M.",
+            "Who are Boulder (Clinics/Outpatient Services)’s investors?": "Advance Venture Partners, Stripes, Acumen Fund, Calm Ventures, and Gaingels are 5 of 20 investors who have invested in Boulder (Clinics/Outpatient Services)."
+        }
+    },
+    {
+        "company_name": "Eko Health",
+        "searched_url": "https://pitchbook.com/profiles/company/59130-37",
+        "details": {
+            "Year Founded": "2013",
+            "Status": "Private",
+            "Employees": "197",
+            "Latest Deal Type": "Series D",
+            "Latest Deal Amount": "$40M",
+            "Investors": "49",
+            "Description": "Developer of an artificial intelligence-powered digital stethoscope designed to aid heart and lung disease detection. The company's digital stethoscopes eliminate distracting background noise with amplification and provide analysis for improved diagnosis and patient care, enabling healthcare professionals to visualize, record, and share patient data with greater accuracy.",
+            "Website": "www.ekohealth.com",
+            "Formerly Known As": "Eko Devices",
+            "Ownership Status": "Privately Held (backing)",
+            "Financing Status": "Venture Capital-Backed",
+            "Primary Industry": "Monitoring Equipment",
+            "Other Industries": "Application Software",
+            "Vertical(s)": "Artificial Intelligence & Machine Learning,\nE-Commerce,\nHealthTech,\nMobile",
+            "Address": [
+                "2100 Powell Street",
+                "Suite 300",
+                "Emeryville, CA 94608",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/eko-health",
+                "Twitter": "https://twitter.com/eko_health",
+                "Facebook": "https://www.facebook.com/eko"
+            },
+            "Industries": [
+                "Monitoring Equipment"
+            ],
+            "Verticals": [
+                "www.ekohealth.com",
+                "Artificial Intelligence & Machine Learning",
+                "E-Commerce",
+                "HealthTech",
+                "Mobile"
+            ],
+            "When was Eko (Monitoring Equipment) founded?": "Eko (Monitoring Equipment) was founded in 2013.",
+            "Where is Eko (Monitoring Equipment) headquartered?": "Eko (Monitoring Equipment) is headquartered in Emeryville, CA.",
+            "What is the size of Eko (Monitoring Equipment)?": "Eko (Monitoring Equipment) has 197 total employees.",
+            "What industry is Eko (Monitoring Equipment) in?": "Eko (Monitoring Equipment)’s primary industry is Monitoring Equipment.",
+            "Is Eko (Monitoring Equipment) a private or public company?": "Eko (Monitoring Equipment) is a Private company.",
+            "What is the current valuation of Eko (Monitoring Equipment)?": "The current valuation of Eko (Monitoring Equipment) is .",
+            "What is Eko (Monitoring Equipment)’s current revenue?": "The current revenue for Eko (Monitoring Equipment) is   .",
+            "How much funding has Eko (Monitoring Equipment) raised over time?": "Eko (Monitoring Equipment) has raised $162M.",
+            "Who are Eko (Monitoring Equipment)’s investors?": "Double Point Ventures, EDBI, Gaingels, LG Technology Ventures, and What If Ventures are 5 of 49 investors who have invested in Eko (Monitoring Equipment).",
+            "Who are Eko (Monitoring Equipment)’s competitors?": "Cardiio, AliveCor, EHRV, Agatsa, and Firstbeat are some of the 14 competitors of Eko (Monitoring Equipment)."
+        }
+    },
+    {
+        "company_name": "Carbon Health",
+        "searched_url": "https://pitchbook.com/profiles/company/166357-54",
+        "details": {
+            "Description": "Operator of mobile-based healthcare networks and clinics, intended to offer convenient and accessible healthcare. The company provides omnichannel care from trusted providers at a wide variety of access points, including clinics, pop-up sites, videos, and applications, enabling patients to access technology-enabled healthcare services from anywhere.",
+            "Website": "www.carbonhealth.com",
+            "Formerly Known As": "MD Collab",
+            "Ownership Status": "Privately Held (backing)",
+            "Financing Status": "Venture Capital-Backed",
+            "Primary Industry": "Other Healthcare Technology Systems",
+            "Other Industries": "Other Healthcare Services",
+            "Vertical(s)": "Digital Health,\nHealthTech,\nMobile",
+            "Address": [
+                "300 California Street",
+                "7th Floor",
+                "San Francisco, CA 94104",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/carbon-health",
+                "Twitter": "https://twitter.com/carbonhealth",
+                "Facebook": "https://www.facebook.com/carbonhealth"
+            },
+            "Industries": [
+                "Other Healthcare Technology Systems"
+            ],
+            "Verticals": [
+                "www.carbonhealth.com",
+                "Digital Health",
+                "HealthTech",
+                "Mobile"
+            ],
+            "When was Carbon Health founded?": "Carbon Health was founded in 2015.",
+            "Where is Carbon Health headquartered?": "Carbon Health is headquartered in San Francisco, CA.",
+            "What is the size of Carbon Health?": "Carbon Health has 1,056 total employees.",
+            "What industry is Carbon Health in?": "Carbon Health’s primary industry is Other Healthcare Technology Systems.",
+            "Is Carbon Health a private or public company?": "Carbon Health is a Private company.",
+            "What is Carbon Health’s current revenue?": "The current revenue for Carbon Health is  .",
+            "How much funding has Carbon Health raised over time?": "Carbon Health has raised $945M.",
+            "Who are Carbon Health’s investors?": "ACT Venture Partners, Sanofi Ventures, This is Water, Ventioneers, and BAM Elevate are 5 of 67 investors who have invested in Carbon Health.",
+            "Who are Carbon Health’s competitors?": "Medici, MyTelemedicine, Min Doktor, Zipnosis, and Maven are some of the 52 competitors of Carbon Health."
+        }
+    },
+    {
+        "company_name": "Science 37",
+        "searched_url": "https://pitchbook.com/profiles/company/126145-45",
+        "details": {
+            "Year Founded": "2014",
+            "Status": "Acquired/​Merged",
+            "Employees": "460",
+            "Latest Deal Type": "M&A",
+            "Latest Deal Amount": "$38M",
+            "Description": "Developer of a decentralized clinical trial operating system intended to accelerate clinical research by enabling universal trial access for patients. The company offers integrated telemedicine investigators, mobile nurses, remote coordinators, patient communities and connected devices, enabling universal access to clinical research for patients and providers.",
+            "Website": "www.science37.com",
+            "Ownership Status": "Acquired/Merged (Operating Subsidiary)",
+            "Financing Status": "Formerly VC-backed",
+            "Primary Industry": "Other Healthcare Services",
+            "Other Industries": "Other Healthcare Technology Systems",
+            "Parent Company": "eMed",
+            "Vertical(s)": "Digital Health,\nSaaS,\nTMT,\nLife Sciences",
+            "Address": [
+                "3005 Carrington Mill Boulevard",
+                "Suite 500",
+                "Morrisville, NC 27560",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/science-37",
+                "Twitter": "https://twitter.com/science37x",
+                "Facebook": "https://www.facebook.com/science37"
+            },
+            "Industries": [
+                "Other Healthcare Services"
+            ],
+            "Verticals": [
+                "www.science37.com",
+                "eMed",
+                "Digital Health",
+                "SaaS",
+                "TMT",
+                "Life Sciences"
+            ],
+            "When was Science 37 Holdings founded?": "Science 37 Holdings was founded in 2014.",
+            "Where is Science 37 Holdings headquartered?": "Science 37 Holdings is headquartered in Morrisville, NC.",
+            "What is the size of Science 37 Holdings?": "Science 37 Holdings has 460 total employees.",
+            "What industry is Science 37 Holdings in?": "Science 37 Holdings’s primary industry is Other Healthcare Services.",
+            "Is Science 37 Holdings a private or public company?": "Science 37 Holdings is a Private company.",
+            "What is the current valuation of Science 37 Holdings?": "The current valuation of Science 37 Holdings is .",
+            "What is Science 37 Holdings’s current revenue?": "The current revenue for Science 37 Holdings is   .",
+            "How much funding has Science 37 Holdings raised over time?": "Science 37 Holdings has raised $341M.",
+            "Who are Science 37 Holdings’s investors?": "Amgen Ventures,  , BlackRock,  , and Casdin Capital are 5 of 23 investors who have invested in Science 37 Holdings.",
+            "Who are Science 37 Holdings’s competitors?": "Curai Health, Elligo Health Research, Medable, TriNetX, and Epic (Other Healthcare Technology Systems) are some of the 13 competitors of Science 37 Holdings.",
+            "When was Science 37 Holdings acquired?": "Science 37 Holdings was acquired on 11-Mar-2024.",
+            "Who acquired Science 37 Holdings?": "Science 37 Holdings was acquired by eMed."
+        }
+    },
+    {
+        "company_name": "HealthJoy",
+        "searched_url": "https://pitchbook.com/profiles/company/117120-61",
+        "details": {
+            "Year Founded": "2014",
+            "Status": "Private",
+            "Employees": "327",
+            "Latest Deal Type": "Series D",
+            "Latest Deal Amount": "$60M",
+            "Investors": "24",
+            "Description": "Developer of a care navigation platform designed to simplify the healthcare experience and reduce complexity. The company's platform uses artificial intelligence- driven virtual assistants to guide users to the correct and cost-effective care options as well as provide access to suitable doctors, concierges, insurance experts, and comparison shoppers, enabling employees to improve decisions by managing claims, health savings accounts, and prescriptions.",
+            "Website": "www.healthjoy.com",
+            "Ownership Status": "Privately Held (backing)",
+            "Financing Status": "Venture Capital-Backed",
+            "Primary Industry": "Other Healthcare Technology Systems",
+            "Other Industries": "Application Software",
+            "Vertical(s)": "HR Tech,\nDigital Health,\nSaaS,\nArtificial Intelligence & Machine Learning,\nHealthTech,\nMobile",
+            "Address": [
+                "435 North LaSalle Drive",
+                "Suite 400",
+                "Chicago, IL 60654",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/healthjoy",
+                "Twitter": "https://twitter.com/healthjoy",
+                "Facebook": "https://www.facebook.com/healthjoydotcom"
+            },
+            "Industries": [
+                "Other Healthcare Technology Systems"
+            ],
+            "Verticals": [
+                "www.healthjoy.com",
+                "HR Tech",
+                "Digital Health",
+                "SaaS",
+                "Artificial Intelligence & Machine Learning",
+                "HealthTech",
+                "Mobile"
+            ],
+            "When was HealthJoy founded?": "HealthJoy was founded in 2014.",
+            "Where is HealthJoy headquartered?": "HealthJoy is headquartered in Chicago, IL.",
+            "What is the size of HealthJoy?": "HealthJoy has 327 total employees.",
+            "What industry is HealthJoy in?": "HealthJoy’s primary industry is Other Healthcare Technology Systems.",
+            "Is HealthJoy a private or public company?": "HealthJoy is a Private company.",
+            "What is the current valuation of HealthJoy?": "The current valuation of HealthJoy is .",
+            "What is HealthJoy’s current revenue?": "The current revenue for HealthJoy is .",
+            "How much funding has HealthJoy raised over time?": "HealthJoy has raised $113M.",
+            "Who are HealthJoy’s investors?": "Blue Hour Ventures, Bridge Ventures (Chicago), Canadian Imperial Bank of Commerce, Endeavour Vision, and Gershon Capital are 5 of 24 investors who have invested in HealthJoy.",
+            "Who are HealthJoy’s competitors?": "98point6, Zipnosis, MyTelemedicine, Min Doktor, and YCare are some of the 76 competitors of HealthJoy."
+        }
+    },
+    {
+        "company_name": "Hicuity Health",
+        "searched_url": "https://pitchbook.com/profiles/company/53422-66",
+        "details": {
+            "Year Founded": "2005",
+            "Status": "Private",
+            "Employees": "115",
+            "Latest Deal Type": "PE Growth",
+            "Financing Rounds": "7",
+            "Description": "Provider of acute care telemedicine services intended to elevate critical care. The company's services include ICU programs and evidence-based protocols including telemedicine tools that connect physicians and nurses with patients, families, and onsite clinicians, enabling hospitals to improve the lives of patients.",
+            "Website": "www.hicuityhealth.com",
+            "Formerly Known As": "Advanced ICU Care",
+            "Ownership Status": "Privately Held (backing)",
+            "Financing Status": "Private Equity-Backed",
+            "Primary Industry": "Clinics/Outpatient Services",
+            "Other Industries": "Outcome Management (Healthcare)",
+            "Vertical(s)": "Digital Health,\nHealthTech",
+            "Address": [
+                "One City Place Drive",
+                "Suite 570",
+                "Saint Louis, MO 63141",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/hicuityhealth",
+                "Twitter": "https://twitter.com/HicuityHealth",
+                "Facebook": "https://www.facebook.com/HicuityHealth"
+            },
+            "Industries": [
+                "Clinics/Outpatient Services"
+            ],
+            "Verticals": [
+                "www.hicuityhealth.com",
+                "Digital Health",
+                "HealthTech"
+            ],
+            "When was Hicuity Health founded?": "Hicuity Health was founded in 2005.",
+            "Where is Hicuity Health headquartered?": "Hicuity Health is headquartered in Saint Louis, MO.",
+            "What is the size of Hicuity Health?": "Hicuity Health has 115 total employees.",
+            "What industry is Hicuity Health in?": "Hicuity Health’s primary industry is Clinics/Outpatient Services.",
+            "Is Hicuity Health a private or public company?": "Hicuity Health is a Private company.",
+            "What is the current valuation of Hicuity Health?": "The current valuation of Hicuity Health is .",
+            "What is Hicuity Health’s current revenue?": "The current revenue for Hicuity Health is  .",
+            "How much funding has Hicuity Health raised over time?": "Hicuity Health has raised $46.6M.",
+            "Who are Hicuity Health’s investors?": "Concord Health Partners and Arboretum Ventures have invested in Hicuity Health.",
+            "Who are Hicuity Health’s competitors?": "MDLive, Carbon Health, Amwell, Access TeleCare, and First Stop Health are some of the 8 competitors of Hicuity Health."
+        }
+    },
+    {
+        "company_name": "Concert Health",
+        "searched_url": "https://pitchbook.com/profiles/company/232392-88",
+        "details": {
+            "Year Founded": "2016",
+            "Status": "Private",
+            "Employees": "232",
+            "Latest Deal Type": "Accelerator/​Inc",
+            "Investors": "18",
+            "Description": "Provider of behavioral health services intended to assist in screening, therapy, and psychiatric consultations. The company offers a list of high-performing therapist-care managers who can deliver screening, assess symptom severity, and provide brief therapy interventions while working with the billing team to ensure proper documentation and payment, it works directly with primary care teams to create shared care plans for the patient that can address both physical and mental conditions, enabling doctors and physicians to deliver good-quality, evidence-based behavioral health care in the technology infrastructure.",
+            "Website": "www.concerthealth.com",
+            "Ownership Status": "Privately Held (backing)",
+            "Financing Status": "Venture Capital-Backed",
+            "Primary Industry": "Practice Management (Healthcare)",
+            "Other Industries": "Clinics/Outpatient Services",
+            "Vertical(s)": "HealthTech",
+            "Address": [
+                "550 West Block Street",
+                "4th Floor",
+                "San Diego, CA 92101",
+                "United States"
+            ],
+            "Social Media": {
+                "LinkedIn": "https://www.linkedin.com/company/concert-health-inc",
+                "Twitter": "https://twitter.com/Concert_Health",
+                "Facebook": "https://www.facebook.com/ConcertHealth"
+            },
+            "Industries": [
+                "Practice Management (Healthcare)"
+            ],
+            "Verticals": [
+                "www.concerthealth.com",
+                "HealthTech"
+            ],
+            "When was Concert Health founded?": "Concert Health was founded in 2016.",
+            "Where is Concert Health headquartered?": "Concert Health is headquartered in San Diego, CA.",
+            "What is the size of Concert Health?": "Concert Health has 232 total employees.",
+            "What industry is Concert Health in?": "Concert Health’s primary industry is Practice Management (Healthcare).",
+            "Is Concert Health a private or public company?": "Concert Health is a Private company.",
+            "What is Concert Health’s current revenue?": "The current revenue for Concert Health is  .",
+            "How much funding has Concert Health raised over time?": "Concert Health has raised $58.8M.",
+            "Who are Concert Health’s investors?": "Connect (San Diego), AdventHealth, BluePointe Ventures, CommonSpirit Health, and Define Ventures are 5 of 18 investors who have invested in Concert Health.",
+            "Who are Concert Health’s competitors?": "Aptihealth, Virta Health, Quartet Health, HealthTap, and Spring Health are some of the 20 competitors of Concert Health."
+        }
+    },
+    {
+        "company_name": "MediBuddy",
+>>>>>>> 18e534434cb8c129b99603e398ca67d5749e50ac
         "searched_url": "https://pitchbook.com/profiles/company/110616-58",
         "details": {
             "Year Founded": "2013",
