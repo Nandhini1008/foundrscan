@@ -1,5 +1,3 @@
-
-
 from typing import Dict, List, Optional, Tuple, Union
 from dataclasses import dataclass
 import json
@@ -9,7 +7,16 @@ import os
 from together import Together
 from dotenv import load_dotenv
 import re
-
+import asyncio
+import aiohttp
+import pyaudio
+from deepgram import Deepgram
+"""try:
+    return response.choices[0].message.content.strip()
+except (AttributeError, IndexError, KeyError):
+    logger.error("Unexpected response format from Together AI")
+    return "❌ Unexpected response format from the AI."
+"""
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -17,9 +24,14 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Audio parameters
+CHUNK = 1024
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 16000
+
 @dataclass
 class StartupSummary:
-    """Data class to store structured startup information"""
     title: str
     description: str
     target_users: List[str]
@@ -60,108 +72,136 @@ class StartupIdeaAnalyzer:
     def __init__(self):
         """Initialize the analyzer with Together AI client"""
         try:
-            self.client = Together()
+            # Load environment variables from .env file
+            load_dotenv(override=True)
+            
+            # Get API keys from environment variables
+            together_api_key = os.getenv("TOGETHER_API_KEY")
+            self.deepgram_api_key = os.getenv("DEEPGRAM_API_KEY")
+            
+            if not together_api_key:
+                raise ValueError("TOGETHER_API_KEY environment variable is not set")
+            if not self.deepgram_api_key:
+                raise ValueError("DEEPGRAM_API_KEY environment variable is not set")
+                
+            self.client = Together(api_key=together_api_key)
             logger.info("Successfully initialized Together AI client")
+            
         except Exception as e:
-            logger.error(f"Failed to initialize Together AI client: {str(e)}")
+            logger.error(f"Failed to initialize: {str(e)}")
             raise
 
-    @staticmethod
-    def _get_system_prompt() -> str:
-        """Get the system prompt for the AI model"""
-        return """You're a smart startup analyst and a startup coach helping understand a founder's idea. Your job is to: 
-1. Understand their startup idea. 
-2. Ask follow-up questions across these categories (if relevant): 
-   - Technical Details 
-   - Revenue
-   - Business Viability 
-   - Team 
-   - Traction & Timeline 
-   - Challenges & Risks 
-   - Long-term Vision
-   - Competition
-   - Monetization
-   - Differentiators
-   - Risks
+    def _get_system_prompt(self) -> str:
+        """Get the system prompt for the AI assistant"""
+        return """You are an expert startup advisor and business analyst. Your role is to:
+1. Ask insightful questions about the startup idea
+2. Help clarify the business model, target market, and value proposition
+3. Identify potential challenges and opportunities
+4. Guide the conversation to gather all necessary information
+5. When you have enough information, say "✅ I'm ready to summarize"
 
+Be professional but conversational. Focus on understanding the core aspects of the business."""
 
-
-Only ask one question at a time. Be curious but friendly. Do not provide reasons or explanations for your questions. 
-When you think you have all the information, say: '✅ I'm ready to summarize your startup now.'
-
-Your task is to:
-1. Understand the idea (even if it's short or unclear).
-2. Ask smart, context-aware follow-up questions to fill in gaps.
-3. Only when you have enough info, summarize the idea clearly and output it in this JSON format:
-
-{
-  "title": "One-line Title",
-  "description": "A clear explanation of the startup idea",
-  "target_users": [],
-  "problem": "",
-  "solution": "",
-  "tech_stack": [],
-  "business_model": "",
-  "monetization": "",
-  "competition": "",
-  "differentiator": "",
-  "risks": [],
-  "vision": ""
-}
-
-If the input is too vague, ask your first clarifying question: "Can you tell me more about what the startup does, who it helps, and how it works?"
-"""
-
-    def query_model(self, prompt: str, conversation_history: str = "") -> str:
-        """
-        Query the AI model with proper error handling and retries
-        
-        Args:
-            prompt: The user's input prompt
-            conversation_history: Previous conversation context
-            
-        Returns:
-            The model's response as a string
-        """
+    def query_model(self, prompt: str, conversation: Optional[str] = None) -> str:
+        """Query the Together AI model with the given prompt"""
         try:
-            messages = [{"role": "system", "content": self._get_system_prompt()}]
-
-            if conversation_history:
-                for line in conversation_history.strip().split("\n"):
-                    if line.startswith("User:"):
-                        messages.append({
-                            "role": "user",
-                            "content": line.replace("User:", "").strip()
-                        })
-                    elif line.startswith(("Assistant:", "System:")):
-                        messages.append({
-                            "role": "assistant",
-                            "content": line.replace("Assistant:", "").replace("System:", "").strip()
-                        })
-
-            messages.append({"role": "user", "content": prompt})
+            full_prompt = prompt
+            if conversation:
+                full_prompt = f"{conversation}\n{prompt}"
 
             response = self.client.chat.completions.create(
-                model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
-                messages=messages
+                model="togethercomputer/llama-3-70b-chat",  # You can change to the model you prefer
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant that helps clarify startup ideas."},
+                    {"role": "user", "content": full_prompt}
+                ],
+                temperature=0.7,
+                max_tokens=1024
             )
-
             return response.choices[0].message.content.strip()
-
         except Exception as e:
-            logger.error(f"Error querying model: {str(e)}")
-            raise
+            logger.error(f"Together AI query failed: {str(e)}")
+            return "❌ Failed to get a response from the AI."
+
+    async def transcribe_live(self) -> str:
+        """Get voice input using Deepgram"""
+        deepgram = Deepgram(self.deepgram_api_key)
+        transcript = ""
+        finished = False
+
+        p = pyaudio.PyAudio()
+        stream = p.open(format=FORMAT,
+                       channels=CHANNELS,
+                       rate=RATE,
+                       input=True,
+                       frames_per_buffer=CHUNK)
+
+        print("🎤 Speak your startup idea...")
+
+        # Create Deepgram connection with options
+        dg_connection = await deepgram.transcription.live({
+            'punctuate': True,
+            'model': 'nova',
+            'language': 'en-US',
+            'encoding': 'linear16',
+            'sample_rate': RATE,
+            'channels': CHANNELS
+        })
+
+        async def process_audio():
+            nonlocal finished
+            try:
+                while not finished:
+                    data = stream.read(CHUNK, exception_on_overflow=False)
+                    await dg_connection.send(data)
+                    await asyncio.sleep(0.1)
+            except Exception as e:
+                logger.error(f"Error during audio processing: {str(e)}")
+            finally:
+                await dg_connection.finish()
+
+        async def process_transcript():
+            nonlocal transcript, finished
+            try:
+                async for event in dg_connection.events():
+                    if event.type == 'Results':
+                        transcript = event.channel.alternatives[0].transcript
+                        if transcript:
+                            print(f"You said: {transcript}")
+                            finished = True
+                            break
+            except Exception as e:
+                logger.error(f"Error during transcript processing: {str(e)}")
+
+        # Start both tasks
+        await dg_connection._start()
+        audio_task = asyncio.create_task(process_audio())
+        transcript_task = asyncio.create_task(process_transcript())
+
+        try:
+            # Wait for transcript task to complete
+            await transcript_task
+        finally:
+            # Clean up
+            finished = True
+            await audio_task
+            stream.stop_stream()
+            stream.close()
+            p.terminate()
+
+        return transcript
 
     def interactive_session(self) -> Tuple[str, str]:
-        """
-        Run an interactive session to gather startup information
-        
-        Returns:
-            Tuple of (user_idea, conversation_history)
-        """
+        """Run an interactive session to gather startup information"""
         try:
-            print("🧠 Tell me your startup idea (ex: AI for diabetes care):")
-            user_idea = input("> ").strip()
+            print("🧠 Tell me your startup idea (type or speak):")
+            print("Press Enter to start speaking, or type your idea and press Enter")
+            
+            user_input = input("> ").strip()
+            if not user_input:  # If user pressed Enter without typing
+                user_idea = asyncio.run(self.transcribe_live())
+            else:
+                user_idea = user_input
             
             conversation = f"System: {self._get_system_prompt()}\nUser: My startup idea: {user_idea}\n"
             
@@ -174,7 +214,13 @@ If the input is too vague, ask your first clarifying question: "Can you tell me 
                 if "✅ I'm ready to summarize" in response:
                     break
                     
-                user_reply = input("💬 You: ").strip()
+                print("\n💬 Your response (type or speak):")
+                user_input = input("> ").strip()
+                if not user_input:  # If user pressed Enter without typing
+                    user_reply = asyncio.run(self.transcribe_live())
+                else:
+                    user_reply = user_input
+                
                 conversation += f"User: {user_reply}\n"
                 
                 response = self.query_model(
@@ -194,16 +240,7 @@ If the input is too vague, ask your first clarifying question: "Can you tell me 
             raise
 
     def generate_summary(self, user_idea: str, conversation: str) -> StartupSummary:
-        """
-        Generate a structured summary of the startup idea
-        
-        Args:
-            user_idea: The initial startup idea
-            conversation: The full conversation history
-            
-        Returns:
-            StartupSummary object containing structured information
-        """
+        """Generate a structured summary of the startup idea"""
         try:
             # Modified prompt to explicitly request JSON format
             prompt = f"""Based on this startup idea and conversation, generate a structured summary in valid JSON format:
