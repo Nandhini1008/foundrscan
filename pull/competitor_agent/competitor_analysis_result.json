@@ -1,0 +1,205 @@
+{
+  "competitors": [
+    {
+      "name": "Practo",
+      "description": "Online doctor consultation platform",
+      "website": "www.practo.com",
+      "features": [
+        "Online doctor consultation"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$241M",
+      "feature_score": 8,
+      "valuation_score": 90,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "",
+        "location": "3rd Block, 371, 1st Cross Road",
+        "investors": [],
+        "status": "",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    },
+    {
+      "name": "MediBuddy",
+      "description": "Medical consultation application",
+      "website": "www.medibuddy.in",
+      "features": [
+        "Medical consultation"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$208M",
+      "feature_score": 8,
+      "valuation_score": 85,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "",
+        "location": "Tower C, 4th Floor",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Debt",
+        "deal_amount": "$8.4M"
+      }
+    },
+    {
+      "name": "Mosaic Wellness",
+      "description": "Digital wellness brands",
+      "website": "www.mosaicwellness.in",
+      "features": [
+        "Digital wellness"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$69.7M",
+      "feature_score": 6,
+      "valuation_score": 60,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "",
+        "location": "6th floor, Thane one, DIL Complex, G.B. Road",
+        "investors": [],
+        "status": "",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    },
+    {
+      "name": "BeatO",
+      "description": "Health monitoring devices",
+      "website": "www.beatoapp.com",
+      "features": [
+        "Health monitoring"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$46.1M",
+      "feature_score": 7,
+      "valuation_score": 70,
+      "details": {
+        "type": "Monitoring Equipment",
+        "employees": "",
+        "location": "A-09, Ground and First Floor",
+        "investors": [],
+        "status": "",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    },
+    {
+      "name": "Dozee",
+      "description": "Contact-free health monitoring equipment",
+      "website": "www.dozeehealth.ai",
+      "features": [
+        "Contact-free health monitoring"
+      ],
+      "pricing": "Freemium model",
+      "funding": "$37.7M",
+      "feature_score": 7,
+      "valuation_score": 65,
+      "details": {
+        "type": "Monitoring Equipment",
+        "employees": "187",
+        "location": "Number 40, City Centre, Ground and Mezzanine Floor",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Accelerator/Inc",
+        "deal_amount": ""
+      }
+    },
+    {
+      "name": "CureBay",
+      "description": "Online eClinics",
+      "website": "www.curebay.com",
+      "features": [
+        "Online eClinics"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$35.5M",
+      "feature_score": 8,
+      "valuation_score": 80,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "1,000",
+        "location": "D19, 4th floor, OCAC Tower, Doordarshan Colony",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Series B",
+        "deal_amount": "$21.1M"
+      }
+    },
+    {
+      "name": "NirogStreet",
+      "description": "Digital healthcare platform",
+      "website": "www.nirogstreet.com",
+      "features": [
+        "Digital healthcare"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$20.2M",
+      "feature_score": 6,
+      "valuation_score": 55,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "",
+        "location": "3rd Floor, ZO Space Private Limited",
+        "investors": [],
+        "status": "",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    },
+    {
+      "name": "Tap Health",
+      "description": "Virtual primary care platform",
+      "website": "www.healthtap.com",
+      "features": [
+        "Virtual primary care"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$28.5M",
+      "feature_score": 7,
+      "valuation_score": 75,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "161",
+        "location": "209 East Java Drive",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Later Stage VC",
+        "deal_amount": "$28.5M"
+      }
+    },
+    {
+      "name": "Sugar.fit",
+      "description": "Diabetes treatment firm",
+      "website": "www.sugarfit.com",
+      "features": [
+        "Diabetes treatment"
+      ],
+      "pricing": "Pay-per-use model",
+      "funding": "$16M",
+      "feature_score": 5,
+      "valuation_score": 50,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "259",
+        "location": "Number 17 and 17C BDA",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Series A",
+        "deal_amount": "$16M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$100B",
+    "growth_rate": "10%",
+    "key_trends": [
+      "Telehealth",
+      "Personalized medicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}
