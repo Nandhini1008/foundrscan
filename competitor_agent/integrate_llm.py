@@ -2,6 +2,7 @@ import json
 import textwrap
 from typing import Dict, List, Any
 from together import Together
+from process_data import final
 
 # Together API Configuration
 TOGETHER_API_KEY = ""
@@ -47,12 +48,10 @@ def load_json_files() -> tuple[Dict, Dict]:
         path1 = r"C:\Users\Nandhini Prakash\startup_ai\foundrscan\agents\output\startup_summary.json"
         with open(path1, 'r', encoding='utf-8') as f:
             startup_data = json.load(f)
-        with open('final_output.json', 'r', encoding='utf-8') as f:
-            competitor_data = json.load(f)
-        return startup_data, competitor_data
+        return startup_data
     except FileNotFoundError as e:
         print(f"Error loading JSON files: {e}")
-        return {}, {}
+        return {}
 
 def prepare_optimized_prompt(startup_data: Dict, competitor_data: Dict) -> List[Dict]:
     """Prepare an optimized prompt that fits within token limits."""
@@ -146,8 +145,13 @@ def prepare_optimized_prompt(startup_data: Dict, competitor_data: Dict) -> List[
         The output MUST be proper JSON format with all strings in double quotes.
         You MUST use the actual company names and data provided in the input.
         You MUST follow the exact JSON structure provided.
+        You MUST give a feature score for each competitor companies that match with the startup features. 
+        Make sure to give a score between 0-10. Also give the score only if the competitor company features match with the startup features. Else don't give any score. 
+        Add the feature score in the key "feature_score" in the competitors array.
+        The feature score should be different for each competitor company. Don't give the same score for all competitors.
         You MUST NOT return any text before or after the JSON object.
-        You MUST include exactly 4 competitors with complete information."""
+        You MUST include all the competitors with the feature score greater than 0 in the competitors array.
+        Give a valuation score 0-100 for each competitor company."""
     }
 
     # User message with the data and format
@@ -164,6 +168,8 @@ def prepare_optimized_prompt(startup_data: Dict, competitor_data: Dict) -> List[
       "features": ["feature1", "feature2"],
       "pricing": "pricing_details",
       "funding": "funding_amount",
+      "feature_score": "0-10",  
+      "valuation_score": "0-100",
       "details": {{
         "type": "company_type",
         "employees": "employee_count",
@@ -175,22 +181,11 @@ def prepare_optimized_prompt(startup_data: Dict, competitor_data: Dict) -> List[
       }}
     }}
   ],
-  "top_competitors": [
-    {{
-      "name": "company_name",
-      "funding": "funding_amount",
-      "description": "brief_description",
-      "type": "company_type",
-      "employees": "employee_count",
-      "key_achievements": ["achievement1", "achievement2"]
-    }}
-  ],
   "market_analysis": {{
     "total_market_size": "market_size_value",
     "growth_rate": "growth_rate_value",
     "key_trends": ["trend1", "trend2"]
   }},
-  "score": "0-10",
   "collaboration_opportunities": ["opportunity1", "opportunity2"]
 }}
 
@@ -205,16 +200,16 @@ IMPORTANT:
 4. Ensure all strings are in double quotes
 5. Do not add any comments or explanations
 6. Do not include any markdown formatting
-7. The output must be valid JSON that can be parsed by json.loads()
-8. Include exactly 4 competitors in the competitors array
-9. Include the top 2 competitors with highest funding in the top_competitors array
+7. The output must be valid JSON that can be parsed by json.loads().
+8. Include all the competitors with the feature score greater than 3 in the competitors array.
 10. Sort competitors by funding amount in descending order
 11. Do not include any empty strings or null values
 12. All fields must contain actual data from the input
 13. Include complete company details including investors and deal information
 14. Add market analysis information
-15. Include key achievements for top competitors
-16. Keep descriptions and features concise to stay within token limits"""
+16. Keep descriptions and features concise to stay within token limits
+17. Make sure to give a feature score between 0-10 for each competitor company based on the similarity of the features. 
+18. Make sure to give a valution score between 0-100 for each competitor company based all the details provided."""
     }
 
     return [system_message, user_message]
@@ -254,18 +249,15 @@ def analyze_with_llm(messages: List[Dict], max_retries: int = 3) -> str:
             if is_valid_json(result):
                 # Additional validation for required fields
                 data = json.loads(result)
-                required_fields = ["competitors", "top_competitors", "market_analysis", "score", "collaboration_opportunities"]
+                required_fields = ["competitors", "market_analysis", "collaboration_opportunities"]
                 for field in required_fields:
                     if field not in data or not data[field]:
                         raise ValueError(f"Missing or empty required field: {field}")
                 
-                # Validate competitor count
-                if len(data["competitors"]) != 4:
-                    raise ValueError("Must include exactly 4 competitors")
                 
                 # Validate data completeness
                 for competitor in data["competitors"]:
-                    required_competitor_fields = ["name", "description", "website", "features", "pricing", "funding", "details"]
+                    required_competitor_fields = ["name", "website", "features", "pricing", "funding", "details"]
                     for field in required_competitor_fields:
                         if field not in competitor or not competitor[field]:
                             raise ValueError(f"Missing or empty required field in competitor: {field}")
@@ -297,7 +289,7 @@ def save_analysis_result(result: str, filename: str = 'competitor_analysis_resul
         data = json.loads(result)
         
         # Ensure all required fields are present and populated
-        required_fields = ["competitors", "top_competitors", "market_analysis", "score", "collaboration_opportunities"]
+        required_fields = ["competitors", "market_analysis", "collaboration_opportunities"]
         for field in required_fields:
             if field not in data:
                 print(f"❌ Missing required field: {field}")
@@ -315,18 +307,18 @@ def save_analysis_result(result: str, filename: str = 'competitor_analysis_resul
     except Exception as e:
         print(f"❌ Error saving analysis: {e}")
 
-def main2():
+def main2(output_data):
     print("🚀 Starting competitor analysis...")
     
     # Load the JSON files
-    startup_data, competitor_data = load_json_files()
+    startup_data = load_json_files()
     
-    if not startup_data or not competitor_data:
+    if not startup_data or not output_data:
         print("❌ Failed to load required JSON files")
         return
     
     # Prepare optimized prompt
-    messages = prepare_optimized_prompt(startup_data, competitor_data)
+    messages = prepare_optimized_prompt(startup_data, output_data)
     
     # Analyze with LLM
     print("🤖 Generating analysis...")
@@ -334,6 +326,7 @@ def main2():
     
     if result:
         save_analysis_result(result)
+        final()
     else:
         print("❌ Failed to generate valid JSON analysis")
 

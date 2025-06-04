@@ -17,7 +17,7 @@ GOOGLE_CSE_ID = ""
 output_data = []
 
 # 💥 Step 1: Google Search with ScraperAPI
-def scraperapi_search(query):
+def scraperapi_search(query, GOOGLE_API_KEY, GOOGLE_CSE_ID):
     search_url = f"https://www.googleapis.com/customsearch/v1?q={query}&key={GOOGLE_API_KEY}&cx={GOOGLE_CSE_ID}"
     proxies = {"http": f"http://scraperapi:{SCRAPERAPI_KEY}@proxy-server.scraperapi.com:8001"}
     print(f"🔍 Searching via Google: {query}")
@@ -40,7 +40,7 @@ def get_company_names_from_url(url):
     company_tags = soup.select('a.t-accent.t-heavy')
     companies = [tag.text.strip() for tag in company_tags]
     # Slice to get only top 10 companies
-    companies = companies[:10]
+    companies = companies[:15]
     print(f"✅ Found {len(companies)} companies.\n")
     return companies
 
@@ -176,14 +176,16 @@ def main(primary_prompt, secondary_prompt):
     all_companies = []
 
     # 🔍 Step 1: Google Search + ScraperAPI crawl
-    search_url = scraperapi_search(primary_prompt)
+    GOOGLE_API_KEY = ""
+    GOOGLE_CSE_ID = ""
+    search_url = scraperapi_search(primary_prompt, GOOGLE_API_KEY, GOOGLE_CSE_ID)
     if not search_url:
         print("🛑 Ending - couldn't get primary search result")
         return
     all_companies += get_company_names_from_url(search_url)
 
     # ✨ Step 2: Google Search + Cloudscraper crawl
-    secondary_url = scraperapi_search(secondary_prompt)
+    secondary_url = scraperapi_search(secondary_prompt, GOOGLE_API_KEY, GOOGLE_CSE_ID)
     if secondary_url:
         all_companies += extract_company_names_from_url(secondary_url)
     else:
@@ -191,12 +193,30 @@ def main(primary_prompt, secondary_prompt):
 
     # 🎯 Cleanup: remove duplicates + limit to 10
     all_companies = list(dict.fromkeys(all_companies))
-
+    count = 0
+    g1 = 2       
+    c1 = 0
+    c2 = 0
+    c3 = 0
     # 🔎 Go deep with pitchbook scraping
     for company in all_companies:
+        count += 1
         print(f"\n🚀 Working on company: {company}")
+        google_api_key = ["", "", ""]
+        if g1 == 0:
+            google_cse_id = ["", ""]
+            g2 = c1%2
+            c1 += 1
+        elif g1 == 1:
+            google_cse_id = ["", ""]
+            g2 = c2%2
+            c2 += 1
+        elif g1 == 2:
+            google_cse_id = ["", ""]
+            g2 = c3%2
+            c3 += 1
         pitchbook_query = f"{company} pitchbook"
-        pitchbook_url = scraperapi_search(pitchbook_query)
+        pitchbook_url = scraperapi_search(pitchbook_query, google_api_key[g1], google_cse_id[g2])
 
         if pitchbook_url:
             details = scrape_with_cloudscraper(pitchbook_url)
@@ -205,17 +225,21 @@ def main(primary_prompt, secondary_prompt):
                 "searched_url": pitchbook_url,
                 "details": details
             })
+            main2(output_data)
             print(f"✅ Scraped {company}")
         else:
             print(f"❌ Skipped {company} (no pitchbook URL)")
 
         cooldown = random.uniform(8, 15)
+        if count >= 30:
+            break
+        else:
+            continue
         print(f"🧊 Cooling down for {round(cooldown, 2)}s...")
         time.sleep(cooldown)
 
     save_json(output_data)
-
-    main2()
+    
 
 
 
