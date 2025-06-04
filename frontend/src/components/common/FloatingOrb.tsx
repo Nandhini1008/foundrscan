@@ -76,7 +76,7 @@ const FloatingOrb: React.FC<FloatingOrbProps> = ({
         </div>
       )}
       
-      <style jsx>{`
+      <style>{`
         @keyframes bounce {
           0%, 100% {
             transform: translateY(0);

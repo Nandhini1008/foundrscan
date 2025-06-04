@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Button from '../common/Button';
 import GradientText from '../common/GradientText';
+import { ChevronRight } from 'lucide-react';
 
 const CallToAction: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="cta" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black"></div>
@@ -25,22 +28,25 @@ const CallToAction: React.FC = () => {
             Join thousands of founders who are building successful startups with data-driven validation from Founder Scan.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link to="/signup">
-              <Button variant="primary" size="lg" className="group">
-                Start Validating My Idea
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => navigate('/login')}
+              className="group"
+            >
+              Start Validating Now
+              <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
             <Link to="/login">
               <Button variant="outline" size="lg">
-                Log In
+                Learn More
               </Button>
             </Link>
           </div>
         </div>
       </div>
       
-      <style jsx>{`
+      <style >{`
         @keyframes blob {
           0% {
             transform: translate(0px, 0px) scale(1);

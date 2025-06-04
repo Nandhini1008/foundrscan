@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Brain } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight, Brain, ChevronRight } from 'lucide-react';
 import GlassmorphicCard from '../common/GlassmorphicCard';
 import GradientText from '../common/GradientText';
 import Button from '../common/Button';
 
 const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -120,12 +121,15 @@ const Hero: React.FC = () => {
             Get comprehensive market analysis, competitor insights, and risk assessment for your startup idea in minutes, not months.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link to="/signup">
-              <Button variant="primary" size="lg" className="group">
-                Start Validating My Idea
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => navigate('/login')}
+              className="group"
+            >
+              Start Validating My Idea
+              <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1" />
+            </Button>
             <Link to="/login">
               <Button variant="outline" size="lg">
                 Log In

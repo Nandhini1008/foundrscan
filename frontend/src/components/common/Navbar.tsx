@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Brain, ChevronRight } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { NavLink } from '../../types';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
+import { useAuth } from '../../contexts/AuthContext';
+import Button from './Button';
 
 interface NavbarProps {
   transparent?: boolean;
@@ -11,6 +15,8 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const navLinks: NavLink[] = [
     { name: 'Features', path: '/#features' },
@@ -33,6 +39,15 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
 
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
   const isLoggedIn = location.pathname === '/chat' || location.pathname === '/dashboard';
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   return (
     <nav
@@ -97,9 +112,13 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
                   >
                     Dashboard
                   </Link>
-                  <button className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                  <Button
+                    variant="secondary"
+                    onClick={handleLogout}
+                    className="text-sm"
+                  >
                     Logout
-                  </button>
+                  </Button>
                 </>
               )}
             </div>
@@ -171,12 +190,13 @@ const Navbar: React.FC<NavbarProps> = ({ transparent = false }) => {
                 >
                   Dashboard
                 </Link>
-                <button 
-                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsOpen(false)}
+                <Button
+                  variant="secondary"
+                  onClick={handleLogout}
+                  className="text-sm"
                 >
                   Logout
-                </button>
+                </Button>
               </>
             )}
           </div>
