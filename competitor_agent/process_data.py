@@ -67,8 +67,15 @@ def final():
     filtered_results.sort(key=lambda x: float(x.get('feature_score', 0) or 0), reverse=True)
 
     # Write results
-    with open('final_result.json', 'w') as f:
-        json.dump(filtered_results, f, indent=2)
+    if not filtered_results:
+        quote = {
+            "message": "No competitors found! Remember: 'The only competition you have is with yourself. Keep innovating and having fun!'"
+        }
+        with open('final_result.json', 'w') as f:
+            json.dump(quote, f, indent=2)
+    else:
+        with open('final_result.json', 'w') as f:
+            json.dump(filtered_results, f, indent=2)
     copy_matching_companies()
 
 def is_details_nonempty(details):
