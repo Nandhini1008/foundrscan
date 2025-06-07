@@ -16,14 +16,14 @@ You are an expert in categorizing startup and tech data into specific domains.
 Given this JSON data, please analyze and provide two key pieces of information:
 
 1. major_domain: Identify the main domain/industry that this startup primarily operates in.
-   - This should be a broad category that represents the core business
+   - This should be a broad category that represents the core business in one word.
    - Example: "AI", "Telemedicine", "Fintech", "E-commerce", etc.
 
 2. domain_search: Identify the most discussed or specific subdomain/topic within the startup.
    - This should be more specific and represent the main focus area
    - If it's difficult to identify a specific subdomain, use the major_domain as domain_search
    -It should be a single word that captures the essence of the startup's focus
-   - Example: If major_domain is "Telemedicine", domain_search could be "Diabetes" or "AI Diagnostics"
+   - Example: If major_domain is "Telemedicine", domain_search could be "Diabetes" or "DiagnosticsAI"
 
 JSON data to analyze:
 {json_data}
