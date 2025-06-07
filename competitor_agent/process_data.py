@@ -1,31 +1,127 @@
 import json
+from functools import lru_cache
+import concurrent.futures
+from typing import List, Dict
 
+def load_json_objects(filename: str) -> List[dict]:
+    """Load a file containing concatenated JSON objects and return a list of dicts."""
+    objects = []
+    with open(filename, 'r') as f:
+        buffer = ''
+        for line in f:
+            buffer += line.strip()
+            # Try to decode a JSON object from the buffer
+            try:
+                while buffer:
+                    obj, idx = json.JSONDecoder().raw_decode(buffer)
+                    objects.append(obj)
+                    buffer = buffer[idx:].lstrip()
+            except json.JSONDecodeError:
+                continue  # Need more lines to complete the object
+    return objects
+
+def process_competitor(company: dict, valuation_scores: dict) -> dict:
+    """Process a single competitor's data."""
+    if company['company_name'] in valuation_scores:
+        company['valuation_score'] = valuation_scores[company['company_name']]
+        return company
+    return None
 
 def final():
-    # Read the competitor analysis result file
-    with open('competitor_analysis_result.json', 'r') as f:
-        competitor_analysis = json.load(f)  
+    """Process and combine competitor analysis results efficiently."""
+    # Load and flatten all competitors from concatenated JSON objects
+    competitor_analysis_objs = load_json_objects('competitor_analysis_result.json')
+    all_competitors = []
+    for obj in competitor_analysis_objs:
+        if 'competitors' in obj:
+            all_competitors.extend(obj['competitors'])
 
-    # Read the final output file
+    # Create valuation scores mapping (use 0 if not present)
+    valuation_scores = {
+        comp['name']: comp.get('valuation_score', 0)
+        for comp in all_competitors
+    }
+
+    # Load final_output.json (standard array)
     with open('final_output.json', 'r') as f:
         final_output = json.load(f)
+    print("phase 1")
+    # Process competitors in parallel
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = [
+            executor.submit(process_competitor, company, valuation_scores)
+            for company in final_output
+        ]
+        combined_results = [
+            future.result() for future in concurrent.futures.as_completed(futures)
+            if future.result() is not None
+        ]
 
-    # Create a dictionary to store the combined results
-    combined_results = []
+    # Sort results by valuation score
+    combined_results.sort(key=lambda x: float(x.get('valuation_score', 0) or 0), reverse=True)
 
-    # Create a dictionary mapping company names to their valuation scores
-    valuation_scores = {comp['name']: comp.get('valuation_score', 0) for comp in competitor_analysis['competitors']}
+    # Filter companies with feature_score > 1
+    filtered_results = [company for company in combined_results if float(company.get('feature_score', 0) or 0) > 1]
 
-    # Match and combine data
-    for company in final_output:
-        if company['company_name'] in valuation_scores:
-            # Add valuation score to the company details
-            company['valuation_score'] = valuation_scores[company['company_name']]
-            combined_results.append(company)
+    # Sort results by feature_score in descending order
+    filtered_results.sort(key=lambda x: float(x.get('feature_score', 0) or 0), reverse=True)
 
-    # Sort the results by valuation score in descending order
-    combined_results.sort(key=lambda x: x.get('valuation_score', 0), reverse=True)
+    # Write results
+    with open('final_result.json', 'w') as f:
+        json.dump(filtered_results, f, indent=2)
+    copy_matching_companies()
 
-    # Write the combined results to a new file
-    with open('competitor_agent/final_result.json', 'w') as f:
-        json.dump(combined_results, f, indent=2) 
+def is_details_nonempty(details):
+    if not isinstance(details, dict):
+        return False
+    # Exclude if only Social Media, Industries, Verticals are present and all are empty
+    allowed_empty_keys = {"Social Media", "Industries", "Verticals"}
+    nonempty_found = False
+    for k, v in details.items():
+        if k in allowed_empty_keys:
+            # Check if these are empty
+            if isinstance(v, dict) and v:
+                nonempty_found = True
+            elif isinstance(v, list) and v:
+                nonempty_found = True
+            elif isinstance(v, str) and v.strip():
+                nonempty_found = True
+            elif v not in (None, '', [], {}):
+                nonempty_found = True
+        else:
+            # For any other key, if non-empty, return True
+            if isinstance(v, dict) and v:
+                return True
+            if isinstance(v, list) and v:
+                return True
+            if isinstance(v, str) and v.strip():
+                return True
+            if v not in (None, '', [], {}):
+                return True
+    # If only allowed_empty_keys are present and all are empty, return False
+    if not nonempty_found:
+        return False
+    return True
+
+def copy_matching_companies():
+    """Copy details of companies from final_output.json to final_result.json if their company_name matches any competitor name in competitor_analysis_result.json, and only if details are not all empty."""
+    # Load competitor names using load_json_objects to handle concatenated JSON objects
+    competitor_analysis_objs = load_json_objects('competitor_analysis_result.json')
+    competitor_names = set()
+    for obj in competitor_analysis_objs:
+        if 'competitors' in obj:
+            competitor_names.update(comp['name'] for comp in obj['competitors'])
+
+    # Load all companies
+    with open('final_output.json', 'r') as f:
+        all_companies = json.load(f)
+
+    # Filter companies whose company_name matches any competitor name and details are not all empty
+    matching_companies = [
+        company for company in all_companies
+        if company.get('company_name') in competitor_names and is_details_nonempty(company.get('details', {}))
+    ]
+
+    # Write the matching companies to final_result1.json
+    with open('final_result1.json', 'w') as f:
+        json.dump(matching_companies, f, indent=2) 
