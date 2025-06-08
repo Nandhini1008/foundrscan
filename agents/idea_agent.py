@@ -11,12 +11,7 @@ import asyncio
 import aiohttp
 import pyaudio
 from deepgram import Deepgram
-"""try:
-    return response.choices[0].message.content.strip()
-except (AttributeError, IndexError, KeyError):
-    logger.error("Unexpected response format from Together AI")
-    return "❌ Unexpected response format from the AI."
-"""
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -93,14 +88,19 @@ class StartupIdeaAnalyzer:
 
     def _get_system_prompt(self) -> str:
         """Get the system prompt for the AI assistant"""
-        return """You are an expert startup advisor and business analyst. Your role is to:
-1. Ask insightful questions about the startup idea
-2. Help clarify the business model, target market, and value proposition
-3. Identify potential challenges and opportunities
-4. Guide the conversation to gather all necessary information
-5. When you have enough information, say "✅ I'm ready to summarize"
-
-Be professional but conversational. Focus on understanding the core aspects of the business."""
+        return """You are an expert startup advisor conducting an interview with a founder. Your job is to:
+1. Ask ONE short and specific follow-up question at a time (1-2 lines max)
+2. Focus on covering these areas one by one:
+   - Who are the target users?
+   - What specific problem are you solving?
+   - How does your solution work?
+   - What makes your solution unique?
+   - How will you make money?
+3. Do NOT explain, summarize, or give opinions
+4. Do NOT generate internal thoughts or lists
+5. Do NOT answer the user's questions
+6. Once all the above areas are clearly answered, say: "✅ I'm ready to summarize"
+"""
 
     def query_model(self, prompt: str, conversation: Optional[str] = None) -> str:
         """Query the Together AI model with the given prompt"""
@@ -110,98 +110,42 @@ Be professional but conversational. Focus on understanding the core aspects of t
                 full_prompt = f"{conversation}\n{prompt}"
 
             response = self.client.chat.completions.create(
-                model="togethercomputer/llama-3-70b-chat",  # You can change to the model you prefer
+                model="meta-llama/Llama-Vision-Free",  # Change if you use another model
                 messages=[
-                    {"role": "system", "content": "You are a helpful assistant that helps clarify startup ideas."},
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are an expert startup advisor conducting an interview. "
+                            "Your role is to:\n"
+                            "1. Ask ONE specific question at a time about the startup idea\n"
+                            "2. Focus on understanding key aspects like:\n"
+                            "- Who are the target users?\n"
+                            "- What specific problem are you solving?\n"
+                            "- How does your solution work?\n"
+                            "- What makes your solution unique?\n"
+                            "- How will you make money?\n"
+                            "3. Do NOT provide analysis or feedback\n"
+                            "4. Do NOT list pros and cons\n"
+                            "5. When you have gathered enough information about all key aspects, say '✅ I'm ready to summarize'"
+                        )
+                    },
                     {"role": "user", "content": full_prompt}
                 ],
-                temperature=0.7,
-                max_tokens=1024
+                temperature=0.4,  # Keep it focused and deterministic
+                max_tokens=80     # Short and concise follow-up
             )
             return response.choices[0].message.content.strip()
+
         except Exception as e:
             logger.error(f"Together AI query failed: {str(e)}")
             return "❌ Failed to get a response from the AI."
 
-    async def transcribe_live(self) -> str:
-        """Get voice input using Deepgram"""
-        deepgram = Deepgram(self.deepgram_api_key)
-        transcript = ""
-        finished = False
-
-        p = pyaudio.PyAudio()
-        stream = p.open(format=FORMAT,
-                       channels=CHANNELS,
-                       rate=RATE,
-                       input=True,
-                       frames_per_buffer=CHUNK)
-
-        print("🎤 Speak your startup idea...")
-
-        # Create Deepgram connection with options
-        dg_connection = await deepgram.transcription.live({
-            'punctuate': True,
-            'model': 'nova',
-            'language': 'en-US',
-            'encoding': 'linear16',
-            'sample_rate': RATE,
-            'channels': CHANNELS
-        })
-
-        async def process_audio():
-            nonlocal finished
-            try:
-                while not finished:
-                    data = stream.read(CHUNK, exception_on_overflow=False)
-                    await dg_connection.send(data)
-                    await asyncio.sleep(0.1)
-            except Exception as e:
-                logger.error(f"Error during audio processing: {str(e)}")
-            finally:
-                await dg_connection.finish()
-
-        async def process_transcript():
-            nonlocal transcript, finished
-            try:
-                async for event in dg_connection.events():
-                    if event.type == 'Results':
-                        transcript = event.channel.alternatives[0].transcript
-                        if transcript:
-                            print(f"You said: {transcript}")
-                            finished = True
-                            break
-            except Exception as e:
-                logger.error(f"Error during transcript processing: {str(e)}")
-
-        # Start both tasks
-        await dg_connection._start()
-        audio_task = asyncio.create_task(process_audio())
-        transcript_task = asyncio.create_task(process_transcript())
-
-        try:
-            # Wait for transcript task to complete
-            await transcript_task
-        finally:
-            # Clean up
-            finished = True
-            await audio_task
-            stream.stop_stream()
-            stream.close()
-            p.terminate()
-
-        return transcript
-
     def interactive_session(self) -> Tuple[str, str]:
         """Run an interactive session to gather startup information"""
         try:
-            print("🧠 Tell me your startup idea (type or speak):")
-            print("Press Enter to start speaking, or type your idea and press Enter")
+            print("🧠 Tell me your startup idea:")
             
-            user_input = input("> ").strip()
-            if not user_input:  # If user pressed Enter without typing
-                user_idea = asyncio.run(self.transcribe_live())
-            else:
-                user_idea = user_input
+            user_idea = input("> ").strip()
             
             conversation = f"System: {self._get_system_prompt()}\nUser: My startup idea: {user_idea}\n"
             
@@ -214,12 +158,8 @@ Be professional but conversational. Focus on understanding the core aspects of t
                 if "✅ I'm ready to summarize" in response:
                     break
                     
-                print("\n💬 Your response (type or speak):")
-                user_input = input("> ").strip()
-                if not user_input:  # If user pressed Enter without typing
-                    user_reply = asyncio.run(self.transcribe_live())
-                else:
-                    user_reply = user_input
+                print("\n💬 Your response:")
+                user_reply = input("> ").strip()
                 
                 conversation += f"User: {user_reply}\n"
                 
@@ -375,4 +315,4 @@ def main():
         raise
 
 if __name__ == "__main__":
-    main()
+    main() 

@@ -145,7 +145,7 @@ Finally, compare the competitor business models with the user's startup idea and
         combined_data = json.dumps(trimmed, indent=2)
 
     data = {
-        "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+        "model": "meta-llama/Llama-3.3-70B-Instructo-Free",
         "messages": [base_prompt, {"role": "user", "content": user_prefix + combined_data}]
     }
     try:
@@ -160,7 +160,7 @@ Finally, compare the competitor business models with the user's startup idea and
 def clean_llm_json_output(raw_output):
     match = re.search(r"{", raw_output)
     cleaned = raw_output[match.start():] if match else raw_output
-    cleaned = cleaned.replace("“", "\"").replace("”", "\"").replace("‘", "'").replace("’", "'")
+    cleaned = cleaned.replace("“", "\"").replace("”", "\"").r-Turbeplace("‘", "'").replace("’", "'")
     return cleaned
 
 def write_new_summary_to_json(analysis_summary, filename="final_strategy_report.json"):

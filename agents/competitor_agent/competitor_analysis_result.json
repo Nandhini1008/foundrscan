@@ -1,0 +1,1025 @@
+[]{
+  "competitors": [
+    {
+      "name": "Zyla health",
+      "description": "Developer of a personal health management application",
+      "website": "www.zyla.in",
+      "features": [
+        "Personal health management"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "0",
+      "feature_score": 0,
+      "valuation_score": 20,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "112",
+        "location": "Innov8 CoWorking, LGF, Saket Salcon Rasvilas",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "10B",
+    "growth_rate": "10%",
+    "key_trends": [
+      "AI-powered health monitoring",
+      "Personalized health management"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Diahome",
+      "description": "AI-powered health monitoring platform",
+      "website": "https://www.diahome.com",
+      "features": [
+        "Core Service"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$1 million",
+      "feature_score": 5,
+      "valuation_score": 80,
+      "details": {
+        "type": "Healthtech",
+        "employees": "50",
+        "location": "New York",
+        "investors": [
+          "Investor A",
+          "Investor B"
+        ],
+        "status": "Active",
+        "deal_type": "Series A",
+        "deal_amount": "$1 million"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10 billion",
+    "growth_rate": "20%",
+    "key_trends": [
+      "AI in healthcare",
+      "Personalized medicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Breathe Therapeutics",
+      "description": "Developer of advanced drug-aerosol therapeutics",
+      "website": "www.breath-therapeutics.com",
+      "features": [
+        "Developer of advanced drug-aerosol therapeutics"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "0",
+      "feature_score": "0",
+      "valuation_score": "20",
+      "details": {
+        "type": "Drug Discovery",
+        "employees": "100",
+        "location": "Aldringenstra\u00dfe 4",
+        "investors": [
+          "Investor1",
+          "Investor2"
+        ],
+        "status": "Active",
+        "deal_type": "Series A",
+        "deal_amount": "$10M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$100B",
+    "growth_rate": "10%",
+    "key_trends": [
+      "AI-powered platforms",
+      "Personalized medicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Collaborations with research institutions"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Tap Health",
+      "description": "Developer of virtual primary care platform designed",
+      "website": "www.healthtap.com",
+      "features": [
+        "Virtual primary care platform"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$100M",
+      "feature_score": 7,
+      "valuation_score": 80,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "100",
+        "location": "209 East Java Drive",
+        "investors": [
+          "Khosla Ventures",
+          "Mayfield Fund"
+        ],
+        "status": "Active",
+        "deal_type": "Series C",
+        "deal_amount": "$100M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10B",
+    "growth_rate": "20%",
+    "key_trends": [
+      "Telemedicine",
+      "AI-powered healthcare"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with healthcare providers",
+    "Integration with electronic health records"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "BeatO",
+      "description": "Developer of health monitoring devices designed to",
+      "website": "www.beatoapp.com",
+      "features": [
+        "Developer of health monitoring devices designed to"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "BeatO has raised $46.1M.",
+      "feature_score": 5,
+      "valuation_score": 80,
+      "details": {
+        "type": "Monitoring Equipment",
+        "employees": "500",
+        "location": "A-09, Ground and First Floor",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Series B",
+        "deal_amount": "$32.8M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "10B",
+    "growth_rate": "15%",
+    "key_trends": [
+      "AI-powered",
+      "Health monitoring"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership",
+    "Integration"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "MediBuddy (formerly docsapp)",
+      "description": "Developer of a medical consultation application",
+      "website": "www.medibuddy.in",
+      "features": [
+        "Developer of a medical consultation application"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$60M",
+      "feature_score": 8,
+      "valuation_score": 80,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "1,630",
+        "location": "Tower C, 4th Floor",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Series B",
+        "deal_amount": "$60M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$1.5B",
+    "growth_rate": "20%",
+    "key_trends": [
+      "Telemedicine",
+      "AI-powered healthcare"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Sugar.fit",
+      "description": "Operator of a diabetes treatment firm",
+      "website": "www.sugarfit.com",
+      "features": [
+        "Diabetes treatment"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$16M",
+      "feature_score": 0,
+      "valuation_score": 60,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "259",
+        "location": "Number 17 and 17C BDA",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Funding",
+        "deal_amount": "$16M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10B",
+    "growth_rate": "10%",
+    "key_trends": [
+      "AI-powered health monitoring",
+      "Personalized medicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "NirogStreet",
+      "description": "Developer of a digital healthcare platform designed to monitor users' health",
+      "website": "www.nirogstreet.com",
+      "features": [
+        "Digital healthcare platform"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "NirogStreet has raised $20.2M.",
+      "feature_score": 5,
+      "valuation_score": 80,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "230",
+        "location": "3rd Floor, ZO Space Private Limited",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "10B",
+    "growth_rate": "15%",
+    "key_trends": [
+      "AI-powered healthcare",
+      "Digital health monitoring"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "A Diabetic Chef",
+      "description": "",
+      "website": "",
+      "features": [
+        "Core Service"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "0",
+      "feature_score": "0",
+      "valuation_score": "20",
+      "details": {
+        "type": "",
+        "employees": "",
+        "location": "",
+        "investors": [],
+        "status": "",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "100 million",
+    "growth_rate": "10%",
+    "key_trends": [
+      "AI adoption",
+      "health monitoring"
+    ]
+  },
+  "collaboration_opportunities": [
+    "healthcare partnerships",
+    "AI research collaborations"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Soma Sense",
+      "description": "AI-powered health monitoring platform",
+      "website": "https://www.somasense.com",
+      "features": [
+        "Core Service",
+        "AI-powered monitoring"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$1 million",
+      "feature_score": 8,
+      "valuation_score": 80,
+      "details": {
+        "type": "Healthtech",
+        "employees": "50",
+        "location": "New York",
+        "investors": [
+          "Investor 1",
+          "Investor 2"
+        ],
+        "status": "Active",
+        "deal_type": "Series A",
+        "deal_amount": "$1 million"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10 billion",
+    "growth_rate": "20%",
+    "key_trends": [
+      "AI-powered health monitoring",
+      "Personalized health services"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with health providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Dr.Mohan's Diabetes Specialities Centre",
+      "description": "Operator of diabetes care centers intended to offer",
+      "website": "www.drmohans.com",
+      "features": [
+        "Operator of diabetes care centers intended to offer"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$13.8M",
+      "feature_score": 0,
+      "valuation_score": 60,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "430",
+        "location": "Number 6-B Conran Smith Road",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "",
+        "deal_amount": "$13.8M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$1.5B",
+    "growth_rate": "10%",
+    "key_trends": [
+      "AI-powered healthcare",
+      "Personalized medicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Mosaic Wellness",
+      "description": "Operator of digital wellness brands",
+      "website": "www.mosaicwellness.in",
+      "features": [
+        "Digital wellness brands"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$69.7M",
+      "feature_score": 0,
+      "valuation_score": 80,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "Not available",
+        "location": "6th floor, Thane one, DIL Complex, G.B. Road",
+        "investors": [],
+        "status": "Not available",
+        "deal_type": "Not available",
+        "deal_amount": "Not available"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$1.5B",
+    "growth_rate": "20%",
+    "key_trends": [
+      "AI-powered wellness",
+      "Digital health platforms"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Integrations with fitness apps"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Cureskin",
+      "description": "Provider of skin health services intended to provide personalized skin care solutions",
+      "website": "www.cureskin.com",
+      "features": [
+        "Provider of skin health services intended to provide personalized skin care solutions"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$20M",
+      "feature_score": 0,
+      "valuation_score": 80,
+      "details": {
+        "type": "Other Healthcare Services",
+        "employees": "54",
+        "location": "26/10, 6th Cross, Ramanna Compound",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Funding",
+        "deal_amount": "$20M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10B",
+    "growth_rate": "15%",
+    "key_trends": [
+      "Personalized medicine",
+      "AI-powered healthcare"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "TGHC - The Good Health Clinic",
+      "description": "Health and wellness services",
+      "website": "https://www.tghc.com",
+      "features": [
+        "Core Service"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$1 million",
+      "feature_score": 5,
+      "valuation_score": 60,
+      "details": {
+        "type": "Healthcare",
+        "employees": "50",
+        "location": "New York",
+        "investors": [
+          "Investor A",
+          "Investor B"
+        ],
+        "status": "Active",
+        "deal_type": "Series A",
+        "deal_amount": "$1 million"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10 billion",
+    "growth_rate": "10%",
+    "key_trends": [
+      "AI-powered healthcare",
+      "Personalized medicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Visit Health",
+      "description": "Developer of a healthcare platform intended to offer virtual care services",
+      "website": "www.getvisitapp.com",
+      "features": [
+        "Virtual care services"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "Visit Health has raised $29.9M",
+      "feature_score": "8",
+      "valuation_score": "80",
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "491",
+        "location": "First Floor, 237",
+        "investors": [],
+        "status": "Acquired/Merged",
+        "deal_type": "",
+        "deal_amount": ""
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "10B",
+    "growth_rate": "20%",
+    "key_trends": [
+      "Telemedicine",
+      "AI-powered healthcare"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Practo",
+      "description": "Developer of an online doctor consultation platform",
+      "website": "www.practo.com",
+      "features": [
+        "Developer of an online doctor consultation platform"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "Practo has raised $241M.",
+      "feature_score": 0,
+      "valuation_score": 80,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "1000+",
+        "location": "3rd Block, 371, 1st Cross Road",
+        "investors": [
+          "Sequoia Capital",
+          "Matrix Partners",
+          "Tiger Global Management"
+        ],
+        "status": "Active",
+        "deal_type": "Series D",
+        "deal_amount": "$90M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10B",
+    "growth_rate": "15%",
+    "key_trends": [
+      "Digital Health",
+      "Telemedicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Healthcare Partnerships",
+    "AI Integration"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "CureBay",
+      "description": "Operator of online eClinics intended to bridge the",
+      "website": "www.curebay.com",
+      "features": [
+        "Operator of online eClinics intended to bridge the"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "CureBay has raised $35.5M.",
+      "feature_score": 0,
+      "valuation_score": 80,
+      "details": {
+        "type": "Clinics/Outpatient Services",
+        "employees": "1,000",
+        "location": "D19, 4th floor, OCAC Tower, Doordarshan Colony",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Series B",
+        "deal_amount": "$21.1M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$100B",
+    "growth_rate": "10%",
+    "key_trends": [
+      "Digital health",
+      "Telemedicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Stance",
+      "description": "Manufacturer of socks intended for men, women",
+      "website": "www.stance.com",
+      "features": [
+        "Manufacturer of socks intended for men, women"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "Stance has raised $132M",
+      "feature_score": 0,
+      "valuation_score": 50,
+      "details": {
+        "type": "Accessories",
+        "employees": "100",
+        "location": "197 Avenida La Pata",
+        "investors": [
+          "Founders Fund",
+          "Tiger Global Management"
+        ],
+        "status": "Active",
+        "deal_type": "Series C",
+        "deal_amount": "$100M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10B",
+    "growth_rate": "10%",
+    "key_trends": [
+      "E-commerce growth",
+      "Sustainable fashion"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with fashion brands",
+    "Integration with e-commerce platforms"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Dozee",
+      "description": "Developer of contact-free health monitoring equipment",
+      "website": "www.dozeehealth.ai",
+      "features": [
+        "Contact-free health monitoring equipment"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "Dozee has raised $37.7M",
+      "feature_score": 8,
+      "valuation_score": 80,
+      "details": {
+        "type": "Monitoring Equipment",
+        "employees": "100",
+        "location": "Number 40, City Centre, Ground and Mezzanine Floor",
+        "investors": [
+          "3one4 Capital",
+          "YourNest Venture Capital",
+          "Valor Siren Ventures"
+        ],
+        "status": "Active",
+        "deal_type": "Series C",
+        "deal_amount": "$37.7M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10B",
+    "growth_rate": "20%",
+    "key_trends": [
+      "AI-powered health monitoring",
+      "Remote patient monitoring"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with healthcare providers",
+    "Integration with wearable devices"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Perkant Tech",
+      "description": "Founded in 2011, YourNest Venture Capital is a venture capital firm",
+      "website": "www.yournest.in",
+      "features": [
+        "Venture Capital"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "0",
+      "feature_score": "0",
+      "valuation_score": "20",
+      "details": {
+        "type": "Venture Capital",
+        "employees": "10",
+        "location": "India",
+        "investors": [
+          "YourNest Venture Capital"
+        ],
+        "status": "Active",
+        "deal_type": "Seed Funding",
+        "deal_amount": "100000"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "100 million",
+    "growth_rate": "10%",
+    "key_trends": [
+      "AI-powered platforms",
+      "Subscription-based models"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with AI startups",
+    "Collaboration with venture capital firms"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Accel",
+      "description": "Founded in 1983, Accel is a venture capital firm",
+      "website": "www.accel.com",
+      "features": [
+        "Venture capital"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$2.5B",
+      "feature_score": 0,
+      "valuation_score": 80,
+      "details": {
+        "type": "Venture capital firm",
+        "employees": "100+",
+        "location": "Palo Alto, CA",
+        "investors": [
+          "Facebook",
+          "Amazon",
+          "Microsoft"
+        ],
+        "status": "Active",
+        "deal_type": "Series C",
+        "deal_amount": "$500M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$1T",
+    "growth_rate": "20%",
+    "key_trends": [
+      "AI adoption",
+      "Cloud computing"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with AI startups",
+    "Joint research initiatives"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "BIRAC",
+      "description": "Operator of a research-based biopharmaceutical company",
+      "website": "www.innpharx.com",
+      "features": [
+        "Research-based biopharmaceuticals"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "0",
+      "feature_score": 0,
+      "valuation_score": 20,
+      "details": {
+        "type": "Pharmaceuticals",
+        "employees": "100",
+        "location": "J - Block, BIRAC BioNest",
+        "investors": [
+          "Investor 1",
+          "Investor 2"
+        ],
+        "status": "Active",
+        "deal_type": "Series A",
+        "deal_amount": "1000000"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "1000000000",
+    "growth_rate": "10%",
+    "key_trends": [
+      "Artificial Intelligence",
+      "Machine Learning"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership",
+    "Investment"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "C-CAMP",
+      "description": "Operator of an online shopping platform",
+      "website": "www.camp.com",
+      "features": [
+        "Operator of an online shopping platform"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$2M",
+      "feature_score": "0",
+      "valuation_score": "60",
+      "details": {
+        "type": "Internet Retail",
+        "employees": "194",
+        "location": "91 Fifth Avenue",
+        "investors": [],
+        "status": "Private",
+        "deal_type": "Funding",
+        "deal_amount": "$2M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$100B",
+    "growth_rate": "10%",
+    "key_trends": [
+      "E-commerce growth",
+      "AI adoption"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with e-commerce companies",
+    "Integration with AI-powered platforms"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Eight Roads Ventures",
+      "description": "Founded in 1969, Eight Roads is the corporate vent",
+      "website": "www.eightroads.com",
+      "features": [
+        "Founded in 1969, Eight Roads is the corporate vent"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "0",
+      "feature_score": 0,
+      "valuation_score": 50,
+      "details": {
+        "type": "Venture Capital",
+        "employees": "100",
+        "location": "London",
+        "investors": [
+          "Fidelity International",
+          "Temasek Holdings"
+        ],
+        "status": "Active",
+        "deal_type": "Series A",
+        "deal_amount": "$100M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10B",
+    "growth_rate": "20%",
+    "key_trends": [
+      "AI adoption",
+      "Digital transformation"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnerships with AI startups",
+    "Joint ventures with industry leaders"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "MediBuddy",
+      "description": "AI-powered health monitoring platform",
+      "website": "https://www.medibuddy.com/",
+      "features": [
+        "Core Service",
+        "AI-powered monitoring"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$40 million",
+      "feature_score": 8,
+      "valuation_score": 80,
+      "details": {
+        "type": "Healthtech",
+        "employees": "500",
+        "location": "Bengaluru, India",
+        "investors": [
+          "Bessemer Venture Partners",
+          "SBI Investment",
+          "Orios Venture Partners"
+        ],
+        "status": "Active",
+        "deal_type": "Series B",
+        "deal_amount": "$40 million"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10 billion",
+    "growth_rate": "20%",
+    "key_trends": [
+      "AI-powered health monitoring",
+      "Telemedicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partner with health insurance providers",
+    "Integrate with electronic health records"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Alteria Capital",
+      "description": "AI-powered investment platform",
+      "website": "https://alteria.capital",
+      "features": [
+        "Core Service",
+        "AI-powered investing"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$10M",
+      "feature_score": 5,
+      "valuation_score": 60,
+      "details": {
+        "type": "Venture Capital",
+        "employees": "50",
+        "location": "New York",
+        "investors": [
+          "BlackRock",
+          "Vanguard"
+        ],
+        "status": "Active",
+        "deal_type": "Series A",
+        "deal_amount": "$10M"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$1B",
+    "growth_rate": "20%",
+    "key_trends": [
+      "AI-powered investing",
+      "Sustainable investing"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership opportunities with fintech companies",
+    "Collaboration with investment banks"
+  ]
+}{
+  "competitors": [
+    {
+      "name": "Upnourish",
+      "description": "AI-powered health monitoring platform",
+      "website": "https://upnourish.com",
+      "features": [
+        "Core Service",
+        "AI-powered monitoring"
+      ],
+      "pricing": "Subscription-based model",
+      "funding": "$1 million",
+      "feature_score": 5,
+      "valuation_score": 60,
+      "details": {
+        "type": "Healthtech",
+        "employees": "50",
+        "location": "New York",
+        "investors": [
+          "Investor A",
+          "Investor B"
+        ],
+        "status": "Active",
+        "deal_type": "Series A",
+        "deal_amount": "$1 million"
+      }
+    }
+  ],
+  "market_analysis": {
+    "total_market_size": "$10 billion",
+    "growth_rate": "20%",
+    "key_trends": [
+      "AI-powered health monitoring",
+      "Personalized medicine"
+    ]
+  },
+  "collaboration_opportunities": [
+    "Partnership with health providers",
+    "Integration with wearable devices"
+  ]
+}
