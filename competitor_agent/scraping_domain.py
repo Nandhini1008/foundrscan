@@ -8,7 +8,10 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 import cloudscraper
+import asyncio
 from integrate_llm import main2
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from process_data import final
 
 SCRAPERAPI_KEY = ""
 GOOGLE_API_KEY = ""
@@ -17,7 +20,7 @@ GOOGLE_CSE_ID = ""
 output_data = []
 
 # 💥 Step 1: Google Search with ScraperAPI
-def scraperapi_search(query):
+def scraperapi_search(query, GOOGLE_API_KEY, GOOGLE_CSE_ID):
     search_url = f"https://www.googleapis.com/customsearch/v1?q={query}&key={GOOGLE_API_KEY}&cx={GOOGLE_CSE_ID}"
     proxies = {"http": f"http://scraperapi:{SCRAPERAPI_KEY}@proxy-server.scraperapi.com:8001"}
     print(f"🔍 Searching via Google: {query}")
@@ -40,7 +43,7 @@ def get_company_names_from_url(url):
     company_tags = soup.select('a.t-accent.t-heavy')
     companies = [tag.text.strip() for tag in company_tags]
     # Slice to get only top 10 companies
-    companies = companies[:10]
+    companies = companies[:15]
     print(f"✅ Found {len(companies)} companies.\n")
     return companies
 
@@ -105,17 +108,29 @@ def scrape_with_selenium(url):
     finally:
         driver.quit()
 
-def scrape_with_cloudscraper(url):
+def scrape_with_cloudscraper(url, max_retries=3, backoff_factor=5):
     print(f"🌐 Scraping with cloudscraper: {url}")
-    try:
-        scraper = cloudscraper.create_scraper()
-        response = scraper.get(url)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.text, "html.parser")
-        return extract_company_details(soup)
-    except Exception as e:
-        print(f"⚠️ Cloudscraper failed with: {e}, switching to Selenium...")
-        return scrape_with_selenium(url)
+    for attempt in range(max_retries):
+        try:
+            scraper = cloudscraper.create_scraper()
+            response = scraper.get(url)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, "html.parser")
+            return extract_company_details(soup)
+        except requests.exceptions.HTTPError as e:
+            if response.status_code == 429:
+                wait = backoff_factor * (2 ** attempt)
+                print(f"⚠️ 429 Too Many Requests. Retrying in {wait} seconds...")
+                time.sleep(wait)
+                continue
+            else:
+                print(f"⚠️ Cloudscraper HTTP error: {e}, switching to Selenium...")
+                return scrape_with_selenium(url)
+        except Exception as e:
+            print(f"⚠️ Cloudscraper failed with: {e}, switching to Selenium...")
+            return scrape_with_selenium(url)
+    print("⚠️ Max retries reached for cloudscraper, switching to Selenium...")
+    return scrape_with_selenium(url)
 
 def save_json(data, filename='final_output.json'):
     with open(filename, 'w', encoding='utf-8') as f:
@@ -123,23 +138,6 @@ def save_json(data, filename='final_output.json'):
     print(f"💾 Saved to {filename}")
 
 # 💥 Full Flow: Run it all
-def extract_company_names_from_url(url):
-    print(f"🕸️ Crawling second URL for extra companies via Cloudscraper: {url}")
-    try:
-        scraper = cloudscraper.create_scraper()
-        response = scraper.get(url)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.text, 'html.parser')
-        company_tags = soup.find_all('a', class_="txn--text-decoration-none txn--text-color-mine-shaft")
-        companies = [tag.text.strip() for tag in company_tags if tag.text.strip()]
-        companies = companies[:10]
-        print(f"✨ Found {len(companies)} bonus companies.\n")
-        return companies
-    except Exception as e:
-        print(f"❌ Cloudscraper failed on second URL: {e}")
-        return []
-
-
 def extract_company_names_from_url(url):
     print(f"🕸️ Crawling via Cloudscraper: {url}")
     try:
@@ -165,57 +163,94 @@ def extract_company_names_from_url(url):
         valid_companies = [company for company in companies if not any(platform in company.lower() for platform in ['linkedin', 'twitter', 'facebook', 'email', 'contact', 'team', 'overview'])]
 
         # Limit to top 10 results
+        valid_companies = valid_companies[:20]
         print(f"✅ Found companies:\n{valid_companies}")
         return valid_companies
     except Exception as e:
         print(f"❌ Error during scraping: {e}")
         return []
     
-def main(primary_prompt, secondary_prompt):
-    global output_data
-    all_companies = []
+def scrape_company(company, api_key, cse_id):
+    try:
+        pitchbook_query = f"{company} pitchbook"
+        pitchbook_url = scraperapi_search(pitchbook_query, api_key, cse_id)
+        if pitchbook_url:
+            details = scrape_with_cloudscraper(pitchbook_url)
+            return {
+                "company_name": company,
+                "searched_url": pitchbook_url,
+                "details": details
+            }
+        else:
+            print(f"❌ Skipped {company} (no pitchbook URL)")
+            return None
+    except Exception as e:
+        print(f"❌ Error scraping company {company}: {e}")
+        return None
 
-    # 🔍 Step 1: Google Search + ScraperAPI crawl
-    search_url = scraperapi_search(primary_prompt)
+def main(primary_prompt, secondary_prompt):
+    all_companies = []
+    with open("final_output.json", 'w', encoding='utf-8') as f:
+        json.dump([], f)
+    with open("competitor_analysis_result.json", 'w', encoding='utf-8') as f1:
+        json.dump([], f1)
+    GOOGLE_API_KEY = ""
+    GOOGLE_CSE_ID = ""
+    search_url = scraperapi_search(primary_prompt, GOOGLE_API_KEY, GOOGLE_CSE_ID)
     if not search_url:
         print("🛑 Ending - couldn't get primary search result")
         return
     all_companies += get_company_names_from_url(search_url)
-
-    # ✨ Step 2: Google Search + Cloudscraper crawl
-    secondary_url = scraperapi_search(secondary_prompt)
+    secondary_url = scraperapi_search(secondary_prompt, GOOGLE_API_KEY, GOOGLE_CSE_ID)
     if secondary_url:
         all_companies += extract_company_names_from_url(secondary_url)
     else:
         print("⚠️ Couldn't get secondary result. Moving on...")
-
-    # 🎯 Cleanup: remove duplicates + limit to 10
     all_companies = list(dict.fromkeys(all_companies))
-
-    # 🔎 Go deep with pitchbook scraping
-    for company in all_companies:
-        print(f"\n🚀 Working on company: {company}")
-        pitchbook_query = f"{company} pitchbook"
-        pitchbook_url = scraperapi_search(pitchbook_query)
-
-        if pitchbook_url:
-            details = scrape_with_cloudscraper(pitchbook_url)
-            output_data.append({
-                "company_name": company,
-                "searched_url": pitchbook_url,
-                "details": details
-            })
-            print(f"✅ Scraped {company}")
-        else:
-            print(f"❌ Skipped {company} (no pitchbook URL)")
-
-        cooldown = random.uniform(8, 15)
-        print(f"🧊 Cooling down for {round(cooldown, 2)}s...")
-        time.sleep(cooldown)
-
+    all_companies = all_companies[:30]  # Limit to 20 for speed
+    output_data = []
+    # Define API keys and CSE IDs
+    api_keys = [
+        "", # api1
+        "", #api2
+        ""  # api3
+    ]
+    cse_ids = [
+        "",  # cse1 for api1
+        "",  # cse2 for api1
+        "",  # cse1 for api2
+        "",  # cse2 for api2
+        "", # cse1 for api3
+        ""  # cse2 for api3
+    ]
+    api_cse_pairs = [
+        (api_keys[0], cse_ids[0]),  # api1 + cse1
+        (api_keys[0], cse_ids[1]),  # api1 + cse2
+        (api_keys[1], cse_ids[2]),  # api2 + cse1
+        (api_keys[1], cse_ids[3]),  # api2 + cse2
+        (api_keys[2], cse_ids[4]),  # api3 + cse1
+        (api_keys[2], cse_ids[5])   # api3 + cse2
+    ]
+    # Parallel scrape company details
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futures = []
+        for idx, company in enumerate(all_companies):
+            api_key, cse_id = api_cse_pairs[idx % 4]
+            futures.append(executor.submit(scrape_company, company, api_key, cse_id))
+        for future in as_completed(futures):
+            result = future.result()
+            if result:
+                output_data.append(result)
+    # Per-company LLM call (sequential, for token safety)
+    for i, company_data in enumerate(output_data):
+        print(f"🤖 Sending company {i+1}/{len(output_data)} to LLM...")
+        asyncio.run(main2([company_data]))
     save_json(output_data)
+    final()
+    print(f"✅ All companies processed and saved.")
 
-    main2()
+
+    
 
 
 
