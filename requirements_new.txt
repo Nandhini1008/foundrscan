@@ -1,0 +1,38 @@
+# Core dependencies
+together==0.2.10
+python-dotenv==1.1.0
+langchain-core>=0.3.64
+langchain-community>=0.0.39
+langsmith>=0.3.45
+langchain-together>=0.3.0
+langchain-openai>=0.3.21
+beautifulsoup4==4.12.3
+selenium==4.18.1
+tiktoken>=0.7.0
+
+# Web scraping and requests
+requests==2.31.0
+webdriver-manager==4.0.1
+aiohttp==3.9.3
+
+# Data processing
+pandas==2.2.1
+numpy==1.26.4
+
+# LLM and API integrations
+openai>=1.68.2,<2.0.0
+google-api-python-client==2.118.0
+
+# Async support
+asyncio==3.4.3
+aiofiles==23.2.1
+
+# Utilities
+tqdm==4.66.2
+validators==0.22.0
+urllib3==2.2.1
+PyYAML==6.0.1
+
+# Type checking
+types-requests==2.31.0.20240218
+mypy==1.8.0
