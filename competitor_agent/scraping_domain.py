@@ -9,9 +9,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 import cloudscraper
 import asyncio
-from integrate_llm import main2
+from competitor_agent.integrate_llm import main2
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from process_data import final
+from competitor_agent.process_data import final
 from tavily import TavilyClient
 
 SCRAPERAPI_KEY = "35980585e6d064d45abb0bd5a3d32e39"
