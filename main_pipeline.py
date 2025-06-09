@@ -1,3 +1,6 @@
+#Main Pipeline for FoundrScan Analysis
+
+
 import json
 import os
 from pathlib import Path
@@ -31,7 +34,6 @@ class ParallelFoundrScanPipeline:
 
         # TEMPORARY: Use predefined startup data for testing
         USE_TEST_DATA = True  # Easy toggle for testing
-        
         if USE_TEST_DATA:
             try:
                 summary_path = self.output_dir / "startup_summary.json"
@@ -56,6 +58,7 @@ class ParallelFoundrScanPipeline:
         self.save_json("startup_summary.json", summary)
         return summary
 
+    # Updated Main Pipeline - Modified _run_competitor_analysis_sync method
     def _run_competitor_analysis_sync(self, startup_data: Dict[str, Any]) -> Dict[str, Any]:
         """Synchronous competitor analysis (for thread pool)"""
         print(f"👥 Starting competitor analysis in thread...")
@@ -63,22 +66,29 @@ class ParallelFoundrScanPipeline:
         print(f"🔍 DEBUG: Competitor analysis startup_data: {startup_data is not None}")
         
         try:
+            # Import here to avoid circular imports
+            from competitor_agent.domain import competitor_agent
+            
             competitor_analysis = competitor_agent()
+            
+            # Ensure we have a valid dictionary response
             if not isinstance(competitor_analysis, dict):
-                # Create a default structure if analysis fails
                 competitor_analysis = {
                     "gaps": [],
                     "competitors": [],
-                    "analysis": "Analysis failed",
-                    "error": str(competitor_analysis)
+                    "analysis": "Analysis returned invalid format",
+                    "competitor_count": 0,
+                    "status": "error"
                 }
+                
         except Exception as e:
             print(f"❌ Error in competitor analysis: {e}")
             competitor_analysis = {
                 "gaps": [],
                 "competitors": [],
-                "analysis": "Analysis failed",
-                "error": str(e)
+                "analysis": f"Analysis failed: {str(e)}",
+                "competitor_count": 0,
+                "status": "error"
             }
         
         # Save output
