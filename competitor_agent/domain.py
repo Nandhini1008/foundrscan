@@ -108,10 +108,12 @@ def competitor_agent():
     # 🧠 Form queries using that domain and best title
     prompt1 = f"{domain_search} startups f6s india"
     prompt2 = f"top {major_domain} companies tracxn india"
+    prompt3 = f"top {domain_search} companies tracxn india"
+    prompt4 = f"top {major_domain} startups f6s india"
 
     try:
         # Run the scraping process
-        main(prompt1, prompt2)  # This will create final_result.json
+        main(prompt1, prompt2, prompt3, prompt4)  # This will create final_result.json
         
         # Load the complete results without transformation
         final_result_data = load_final_result()

@@ -167,7 +167,7 @@ IMPORTANT:
 16. Keep descriptions and features concise to stay within token limits
 17. Make sure to give a feature score between 0-10 for each competitor company based on the similarity of the features. 
 18. Make sure to give a valution score between 0-100 for each competitor company based all the details provided.
-19.If any 2 features or idealogy doesn't match with the startup features then give feature score as 0."""
+19.If most of the features doesn't match with the startup features then give feature score as 0."""
     }
     return [system_message, user_message]
 

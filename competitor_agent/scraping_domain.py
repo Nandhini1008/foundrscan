@@ -12,10 +12,12 @@ import asyncio
 from competitor_agent.integrate_llm import main2
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from competitor_agent.process_data import final
+from tavily import TavilyClient
 
 SCRAPERAPI_KEY = "35980585e6d064d45abb0bd5a3d32e39"
 GOOGLE_API_KEY = ""
 GOOGLE_CSE_ID = ""
+TAVILY_API_KEY = "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" # Placeholder - user should replace with their actual key
 
 output_data = []
 
@@ -24,28 +26,78 @@ def scraperapi_search(query, GOOGLE_API_KEY, GOOGLE_CSE_ID):
     search_url = f"https://www.googleapis.com/customsearch/v1?q={query}&key={GOOGLE_API_KEY}&cx={GOOGLE_CSE_ID}"
     proxies = {"http": f"http://scraperapi:{SCRAPERAPI_KEY}@proxy-server.scraperapi.com:8001"}
     print(f"🔍 Searching via Google: {query}")
-    response = requests.get(search_url, proxies=proxies)
-    response.raise_for_status()
-    results = response.json()
-    if 'items' in results and len(results['items']) > 0:
-        link = results['items'][0]['link']
-        print(f"🔗 Got link: {link}")
-        return link
+    try:
+        response = requests.get(search_url, proxies=proxies)
+        response.raise_for_status()
+        results = response.json()
+        if 'items' in results and len(results['items']) > 0:
+            link = results['items'][0]['link']
+            print(f"🔗 Got link: {link}")
+            return link
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 429:
+            print(f"⚠️ Google Search (ScraperAPI) returned 429. Falling back to Tavily API...")
+            try:
+                client = TavilyClient(api_key=TAVILY_API_KEY)
+                tavily_results = client.search(
+                    query=query,
+                    search_depth="basic",
+                    include_answer=False,
+                    include_images=False,
+                    max_results=1
+                )
+                if 'results' in tavily_results and len(tavily_results['results']) > 0:
+                    link = tavily_results['results'][0]['url']
+                    print(f"🔗 Got link from Tavily: {link}")
+                    return link
+                else:
+                    print("❌ No results found from Tavily API.")
+            except Exception as tavily_e:
+                print(f"❌ Error with Tavily API fallback: {tavily_e}")
+        else:
+            print(f"❌ HTTP error during Google search: {e}")
+    except Exception as e:
+        print(f"❌ An unexpected error occurred during Google search: {e}")
     print("❌ No results found")
     return None
 
 # 💥 Step 2: Scrape first URL for company names
 def get_company_names_from_url(url):
     print(f"🕸️ Crawling first URL for companies: {url}")
-    api_url = f"http://api.scraperapi.com?api_key={SCRAPERAPI_KEY}&url={url}"
-    response = requests.get(api_url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    company_tags = soup.select('a.t-accent.t-heavy')
-    companies = [tag.text.strip() for tag in company_tags]
-    # Slice to get only top 10 companies
-    companies = companies[:15]
-    print(f"✅ Found {len(companies)} companies.\n")
-    return companies
+    soup = None
+    try:
+        api_url = f"http://api.scraperapi.com?api_key={SCRAPERAPI_KEY}&url={url}"
+        response = requests.get(api_url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, 'html.parser')
+    except Exception as e:
+        print(f"⚠️ ScraperAPI failed for {url} with error: {e}. Falling back to TavilyClient.extract...")
+        try:
+            client = TavilyClient(api_key=TAVILY_API_KEY)
+            extract_response = client.extract(urls=[url])
+            if extract_response and 'content' in extract_response:
+                soup = BeautifulSoup(extract_response['content'], 'html.parser')
+            else:
+                print(f"❌ TavilyClient.extract returned no content for {url}.")
+                return []
+        except Exception as tavily_e:
+            print(f"❌ Error with TavilyClient.extract fallback for {url}: {tavily_e}")
+            return []
+
+    if soup:
+        # 🔍 Find all <a> tags with class exactly ["t-accent", "t-heavy"]
+        company_tags = soup.find_all('a', class_='t-accent t-heavy')
+
+        # 🧼 Clean the text and filter out anything sus
+        companies = [
+            tag.text.strip()
+            for tag in company_tags
+            if tag.text.strip() and "team" not in tag.text.lower()
+        ]
+
+        print(f"✅ Found {len(companies)} companies.\n")
+        return companies[:15]  # 🎯 Top 15 only, 'cause we fancy
+    return []
 
 # 💥 Step 3: Scraping company pitchbook details (same as before)
 def extract_company_details(soup):
@@ -99,7 +151,9 @@ def scrape_with_selenium(url):
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
+    options.add_argument("--window-size=1920,1080")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver.implicitly_wait(10)
     try:
         driver.get(url)
         time.sleep(3)
@@ -120,7 +174,7 @@ def scrape_with_cloudscraper(url, max_retries=3, backoff_factor=5):
         except requests.exceptions.HTTPError as e:
             if response.status_code == 429:
                 wait = backoff_factor * (2 ** attempt)
-                print(f"⚠️ 429 Too Many Requests.")
+                print(f"⚠️ 429 Too Many Requests")
             else:
                 print(f"⚠️ Cloudscraper HTTP error: {e}, switching to Selenium...")
                 return scrape_with_selenium(url)
@@ -137,30 +191,58 @@ def save_json(data, filename='final_output.json'):
 
 # 💥 Full Flow: Run it all
 def extract_company_names_from_url(url):
-    print(f"🕸️ Crawling via Cloudscraper: {url}")
+    print(f"🕸️ Crawling via ScraperAPI: {url}")
+    soup = None
     try:
-        scraper = cloudscraper.create_scraper()
-        response = scraper.get(url)
+        api_url = f"http://api.scraperapi.com?api_key={SCRAPERAPI_KEY}&url={url}"
+        response = requests.get(api_url)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
-
+    except Exception as e:
+        print(f"⚠️ ScraperAPI failed for {url} with error: {e}. Falling back to TavilyClient.extract...")
+        try:
+            client = TavilyClient(api_key=TAVILY_API_KEY)
+            extract_response = client.extract(urls=[url])
+            if extract_response and 'content' in extract_response:
+                soup = BeautifulSoup(extract_response['content'], 'html.parser')
+            else:
+                print(f"❌ TavilyClient.extract returned no content for {url}.")
+                return []
+        except Exception as tavily_e:
+            print(f"❌ Error with TavilyClient.extract fallback for {url}: {tavily_e}")
+            return []
+    
+    if soup:
         # Check for anchor tags with company names (existing selectors)
-        company_tags = soup.find_all('a', class_="txn--font-16 txn--text-color-mine-shaft")
+        company_tags = [
+            tag for tag in soup.find_all('a')
+            if set(tag.get('class', [])) == set(['txn--font-16', 'txn--text-color-mine-shaft'])
+        ]
         companies = [tag.text.strip() for tag in company_tags if tag.text.strip() and "team" not in tag.text.lower()]
+        print(f"DEBUG: Initial Companies: {companies}")
 
         # Additional scraping method to cover other domains (existing)
-        additional_tags = soup.find_all('a', class_="txn--text-color-mine-shaft")
-        additional_companies = [tag.text.strip() for tag in additional_tags if tag.text.strip() and "team" not in tag.text.lower()]
-        additional_companies = additional_companies[:10]  # Limit to top 10
+        additional_tags = [
+            tag for tag in soup.find_all('a')
+            if set(tag.get('class', [])) == set(['txn--text-color-mine-shaft'])
+        ]
+        additional_companies = [tag.text.strip() for tag in additional_tags if tag.text.strip() and "team" not in tag.text.lower()]  # Limit to top 10
+        print(f"DEBUG: Additional Companies: {additional_companies}")
 
         # NEW: Also extract from <a class="txn--text-decoration-none txn--text-color-mine-shaft">
-        extra_tags = soup.find_all('a', class_="txn--text-decoration-none txn--text-color-mine-shaft")
+        extra_tags = [
+            tag for tag in soup.find_all('a')
+            if set(tag.get('class', [])) == set(['txn--text-decoration-none', 'txn--text-color-mine-shaft'])
+        ]
         extra_companies = [tag.text.strip() for tag in extra_tags if tag.text.strip() and "team" not in tag.text.lower()]
+        print(f"DEBUG: Extra Companies: {extra_companies}")
 
         # Combine all lists and deduplicate
         all_companies = companies + additional_companies + extra_companies
+        print(f"DEBUG: All Companies (combined): {all_companies}")
         # Filter only valid company names (excluding social media and email links)
-        valid_companies = [company for company in all_companies if not any(platform in company.lower() for platform in ['linkedin', 'twitter', 'facebook', 'email', 'contact', 'team', 'overview'])]
+        valid_companies = [company for company in all_companies if not any(platform in company.lower() for platform in ['linkedin', 'twitter', 'facebook', 'email', 'contact', 'team', 'overview','companies','company','about'])]
+        print(f"DEBUG: Valid Companies (after filtering): {valid_companies}")
         # Deduplicate while preserving order
         seen = set()
         deduped_companies = []
@@ -170,11 +252,10 @@ def extract_company_names_from_url(url):
                 seen.add(company)
         # Limit to top 20 results
         deduped_companies = deduped_companies[:20]
+        print(f"DEBUG: Deduped Companies (final): {deduped_companies}")
         print(f"✅ Found companies:\n{deduped_companies}")
         return deduped_companies
-    except Exception as e:
-        print(f"❌ Error during scraping: {e}")
-        return []
+    return []
     
 def scrape_company(company, api_key, cse_id):
     try:
@@ -194,7 +275,7 @@ def scrape_company(company, api_key, cse_id):
         print(f"❌ Error scraping company {company}: {e}")
         return None
 
-def main(primary_prompt, secondary_prompt):
+def main(primary_prompt, secondary_prompt, third_prompt, fourth_prompt):
     all_companies = []
     with open("final_output.json", 'w', encoding='utf-8') as f:
         json.dump([], f)
@@ -203,15 +284,31 @@ def main(primary_prompt, secondary_prompt):
     GOOGLE_API_KEY = "AIzaSyBJ0TM9Rs73RvK2akpesypWZIvgYdc_aQQ"
     GOOGLE_CSE_ID = "0436fecd901594865"
     search_url = scraperapi_search(primary_prompt, GOOGLE_API_KEY, GOOGLE_CSE_ID)
+    print(f"DEBUG: Primary Search URL: {search_url}")
     if not search_url:
         print("🛑 Ending - couldn't get primary search result")
         return
     all_companies += get_company_names_from_url(search_url)
+    fourth_url = scraperapi_search(fourth_prompt, GOOGLE_API_KEY, GOOGLE_CSE_ID)
+    print(f"DEBUG: Fourth Search URL: {fourth_url}")
+    if not fourth_url:
+        print("🛑 Ending - couldn't get primary search result")
+        return
+    all_companies += get_company_names_from_url(fourth_url)
     secondary_url = scraperapi_search(secondary_prompt, GOOGLE_API_KEY, GOOGLE_CSE_ID)
+    print(f"DEBUG: Secondary Search URL: {secondary_url}")
     if secondary_url:
         all_companies += extract_company_names_from_url(secondary_url)
     else:
         print("⚠️ Couldn't get secondary result. Moving on...")
+    third_url = scraperapi_search(third_prompt, GOOGLE_API_KEY, GOOGLE_CSE_ID)
+    print(f"DEBUG: Third Search URL: {third_url}")
+    if third_url:
+        all_companies += extract_company_names_from_url(third_url)
+    else:
+        print("⚠️ Couldn't get third result. Moving on...")
+    print(all_companies)
+    # exit()
     all_companies = list(dict.fromkeys(all_companies))
     all_companies = all_companies[:30]
     print(all_companies)  # Limit to 20 for speed
