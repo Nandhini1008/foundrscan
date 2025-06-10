@@ -1,3 +1,4 @@
+#idea_agent.py
 from typing import Dict, List, Optional, Tuple, Union
 from dataclasses import dataclass
 import json
@@ -9,7 +10,7 @@ from dotenv import load_dotenv
 import re
 import asyncio
 import aiohttp
-import pyaudio
+#import pyaudio
 from deepgram import Deepgram
 """try:
     return response.choices[0].message.content.strip()
@@ -22,13 +23,13 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
-logger = logging.getLogger(_name_)
+logger = logging.getLogger(__name__)
 
 # Audio parameters
-CHUNK = 1024
+"""CHUNK = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
-RATE = 16000
+RATE = 16000"""
 
 @dataclass
 class StartupSummary:
@@ -69,7 +70,7 @@ class StartupSummary:
 class StartupIdeaAnalyzer:
     """Main class for analyzing startup ideas using AI"""
 
-    def _init_(self):
+    def __init__(self):
         """Initialize the analyzer with Together AI client"""
         try:
             # Load environment variables from .env file
@@ -110,7 +111,7 @@ Be professional but conversational. Focus on understanding the core aspects of t
                 full_prompt = f"{conversation}\n{prompt}"
 
             response = self.client.chat.completions.create(
-                model="togethercomputer/llama-3-70b-chat",  # You can change to the model you prefer
+                model="mistralai/Mixtral-8x7B-Instruct-v0.1",  # You can change to the model you prefer
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant that helps clarify startup ideas."},
                     {"role": "user", "content": full_prompt}
@@ -129,14 +130,14 @@ Be professional but conversational. Focus on understanding the core aspects of t
         transcript = ""
         finished = False
 
-        p = pyaudio.PyAudio()
+        """p = pyaudio.PyAudio()
         stream = p.open(format=FORMAT,
                        channels=CHANNELS,
                        rate=RATE,
                        input=True,
                        frames_per_buffer=CHUNK)
 
-        print("🎤 Speak your startup idea...")
+        print("🎤 Speak your startup idea...")"""
 
         # Create Deepgram connection with options
         dg_connection = await deepgram.transcription.live({
@@ -271,12 +272,12 @@ Format the response EXACTLY like this, with no additional text:
             json_str = response.strip()
             
             # Remove any markdown code block markers
-            if "" in json_str:
+            if "```" in json_str:
                 # Try to find JSON block
-                if "json" in json_str:
-                    json_str = json_str.split("json")[1].split("")[0].strip()
+                if "```json" in json_str:
+                    json_str = json_str.split("```json")[1].split("```")[0].strip()
                 else:
-                    json_str = json_str.split("")[1].split("")[0].strip()
+                    json_str = json_str.split("```")[1].split("```")[0].strip()
             
             # Additional cleanup for common issues
             json_str = json_str.replace('\n', ' ').replace('\r', '')
@@ -346,6 +347,20 @@ Format the response EXACTLY like this, with no additional text:
                 risks=[],
                 vision=""
             )
+        
+    def chat_step(self, conversation: str, user_message: str) -> Tuple[str, str, bool]:
+        """
+        Given the current conversation and a new user message,
+        returns (assistant_response, updated_conversation, ready_to_summarize)
+        """
+        conversation += f"\nUser: {user_message}\n"
+        response = self.query_model(
+            "Continue this conversation about a startup idea. Remember to ask good questions and eventually say you're ready to summarize when you have enough information.",
+            conversation
+        )
+        conversation += f"Assistant: {response}\n"
+        ready = "✅ I'm ready to summarize" in response
+        return response, conversation, ready
 
 def main():
     """Main entry point for the startup idea analyzer"""
@@ -374,5 +389,5 @@ def main():
         logger.error(f"Application error: {str(e)}")
         raise
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()

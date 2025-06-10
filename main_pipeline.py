@@ -33,7 +33,7 @@ class ParallelFoundrScanPipeline:
         print("🔍 DEBUG: Starting idea analysis...")
 
         # TEMPORARY: Use predefined startup data for testing
-        USE_TEST_DATA = True  # Easy toggle for testing
+        USE_TEST_DATA = False  # Easy toggle for testing
         if USE_TEST_DATA:
             try:
                 summary_path = self.output_dir / "startup_summary.json"
@@ -317,14 +317,15 @@ class ParallelFoundrScanPipeline:
             print(f"❌ Error saving {filename}: {e}")
             print(f"🔍 DEBUG: Data type: {type(data)}")
 
-    async def run_pipeline_async(self) -> Dict:
+    async def run_pipeline_async(self, startup_data: Dict = None) -> Dict:
         """Run the complete analysis pipeline with parallel execution"""
         try:
             print("🚀 Starting Parallel FoundrScan Analysis Pipeline...")
 
             # Step 1: Idea Analysis (sequential - needed by others)
             print("\n1️⃣ Analyzing Startup Idea...")
-            startup_data = self.run_idea_analysis()
+            if startup_data is None:
+                startup_data = self.run_idea_analysis()
             if not startup_data:
                 raise ValueError("Failed to get startup data from idea analysis")
 
@@ -349,9 +350,9 @@ class ParallelFoundrScanPipeline:
             traceback.print_exc()
             return {}
 
-    def run_pipeline(self) -> Dict:
+    def run_pipeline(self, startup_data: Dict = None) -> Dict:
         """Synchronous wrapper for the async pipeline"""
-        return asyncio.run(self.run_pipeline_async())
+        return asyncio.run(self.run_pipeline_async(startup_data))
 
 # Alternative: ProcessPoolExecutor version for CPU-intensive tasks
 class ProcessParallelFoundrScanPipeline(ParallelFoundrScanPipeline):

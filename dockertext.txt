@@ -1,0 +1,5 @@
+# Docker setup
+- API server (FastAPI)
+- Redis cache
+- PostgreSQL database
+- Background worker processes
