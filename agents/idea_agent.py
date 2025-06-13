@@ -43,6 +43,7 @@ class StartupSummary:
     monetization: str
     competition: str
     differentiator: str
+    scale:str
     risks: List[str]
     vision: str
 
@@ -59,6 +60,7 @@ class StartupSummary:
             "monetization": self.monetization,
             "competition": self.competition,
             "differentiator": self.differentiator,
+            "scale":self.scale,
             "risks": self.risks,
             "vision": self.vision
         }
@@ -111,7 +113,7 @@ Be professional but conversational. Focus on understanding the core aspects of t
                 full_prompt = f"{conversation}\n{prompt}"
 
             response = self.client.chat.completions.create(
-                model="mistralai/Mixtral-8x7B-Instruct-v0.1",  # You can change to the model you prefer
+                model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",  # You can change to the model you prefer
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant that helps clarify startup ideas."},
                     {"role": "user", "content": full_prompt}
