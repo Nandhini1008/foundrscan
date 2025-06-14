@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "industry": "Software",
   "market_trend": "Growing market with increasing demand",
   "TAM_SAM_SOM": {
@@ -24,5 +25,35 @@
   ],
   "recent_investments": [
     "No specific investment data available"
+=======
+  "industry": "Software and IT Services (NACE code: 62)",
+  "market_trend": "The global fashion and beauty apps market is expected to grow at a CAGR of 14.8% from 2023 to 2024, driven by increasing demand for personalized styling services.",
+  "TAM_SAM_SOM": {
+    "Total Addressable Market (TAM)": "$83B",
+    "Serviceable Available Market (SAM)": "$5.1B",
+    "Serviceable Obtainable Market (SOM)": "$1.5B"
+  },
+  "customer_segments": [
+    "Fashion-conscious individuals aged 25-45",
+    "Tech-savvy millennials and Gen Z",
+    "High-income individuals seeking premium fashion and beauty services"
+  ],
+  "pricing_opportunity": "Freemium model with premium subscription tiers offering advanced features and expert stylist consultations, priced at $9.99/month for basic and $19.99/month for premium",
+  "market_opportunities": [
+    "AI-powered styling services",
+    "Personalized fashion recommendations",
+    "Virtual try-on and augmented reality experiences",
+    "Sustainable fashion and eco-friendly products"
+  ],
+  "market_risks": [
+    "Data privacy concerns",
+    "Accurately identifying and suggesting outfits for diverse body types, styles, and trends",
+    "Gaining and retaining users in a competitive market"
+  ],
+  "recent_investments": [
+    "Stitch Fix raised $120M in Series I funding from General Catalyst and T. Rowe Price (Jan 2024)",
+    "ThredUp raised $175M in Series I funding from General Catalyst and T. Rowe Price (Jan 2024)",
+    "Cognify raised $14M in Series A funding from NEA (Feb 2024)"
+>>>>>>> 8209128ebdf03b9d3fc7fe15cc0f3d40ae7eab1f
   ]
 }

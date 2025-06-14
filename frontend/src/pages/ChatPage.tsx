@@ -6,15 +6,25 @@ import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 
 interface ChatMessage {
-  role: 'user' | 'assistant';
+  id: string;
   content: string;
+  sender: 'user' | 'ai';
+  timestamp: Date;
 }
+
+const welcomeMessage: ChatMessage = {
+  id: '1',
+  content: "Hi there! I'm the Founder Scan AI. Tell me about your startup idea, and I'll help validate it across market trends, competition, and investor potential.",
+  sender: 'ai',
+  timestamp: new Date(),
+};
 
 const ChatPage: React.FC = () => {
   const { user } = useAuth();
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([welcomeMessage]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
 
   // Load previous chat history when component mounts
   useEffect(() => {
@@ -25,7 +35,7 @@ const ChatPage: React.FC = () => {
           const data = await getUserOutput(user);
           console.log('Loaded chat history:', data);
           if (data?.output?.messages) {
-            setMessages(data.output.messages);
+            setMessages(data.output.messages as ChatMessage[]);
           }
         } catch (error) {
           console.error('Error loading chat history:', error);
@@ -40,32 +50,62 @@ const ChatPage: React.FC = () => {
     e.preventDefault();
     if (!input.trim() || !user) return;
 
-    console.log('Sending message:', input);
     setLoading(true);
     try {
       // Add user message
-      const newMessages = [...messages, { role: 'user', content: input }];
+      const userMessage: ChatMessage = {
+        id: Date.now().toString(),
+        content: input,
+        sender: 'user',
+        timestamp: new Date(),
+      };
+      const newMessages = [...messages, userMessage];
       setMessages(newMessages);
       setInput('');
 
-      // TODO: Add your AI processing logic here
-      // For now, we'll just simulate a response
-      const aiResponse = "This is a simulated AI response.";
-      console.log('AI response:', aiResponse);
-      
-      // Add AI response
-      const updatedMessages = [...newMessages, { role: 'assistant', content: aiResponse }];
-      setMessages(updatedMessages);
+      // Call the real API
+      const res = await fetch('http://localhost:8000/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          message: input,
+          session_id: sessionId,
+        }),
+      });
 
-      // Save to Firestore
-      console.log('Saving to Firestore...');
+      if (!res.ok) {
+        throw new Error(`API Error: ${res.status}`);
+      }
+
+      const data = await res.json();
+      if (data.session_id && !sessionId) {
+        setSessionId(data.session_id);
+      }
+
+      const aiMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        content: data.response || '⚠️ No response received from API.',
+        sender: 'ai',
+        timestamp: new Date(),
+      };
+      const updatedMessages = [...newMessages, aiMessage];
+      setMessages(updatedMessages);
       await storeUserOutput(user, {
         messages: updatedMessages,
         lastUpdated: new Date()
       });
-      console.log('Successfully saved to Firestore');
     } catch (error) {
       console.error('Error in chat:', error);
+      const errorMessage: ChatMessage = {
+        id: (Date.now() + 2).toString(),
+        content: `⚠️ API Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        sender: 'ai',
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setLoading(false);
     }
@@ -77,17 +117,36 @@ const ChatPage: React.FC = () => {
       
       <div className="max-w-4xl mx-auto pt-20 px-4">
         <div className="bg-gray-800 rounded-lg shadow-xl p-6 mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+            <div className="text-lg font-semibold text-white">Chat</div>
+            <button
+              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-4 py-2 rounded shadow transition-colors border border-white"
+              onClick={() => {
+                setMessages([{
+                  id: '1',
+                  content: "Hi there! I'm the Founder Scan AI. Tell me about your startup idea, and I'll help validate it across market trends, competition, and investor potential.",
+                  sender: 'ai',
+                  timestamp: new Date(),
+                }]);
+                setSessionId(null);
+                localStorage.removeItem('chatSessionId');
+              }}
+              title="Start a new chat session"
+            >
+              New Chat
+            </button>
+          </div>
           <div className="space-y-4 h-[60vh] overflow-y-auto mb-4">
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={`flex ${
-                  message.role === 'user' ? 'justify-end' : 'justify-start'
+                  message.sender === 'user' ? 'justify-end' : 'justify-start'
                 }`}
               >
                 <div
                   className={`max-w-[80%] rounded-lg p-4 ${
-                    message.role === 'user'
+                    message.sender === 'user'
                       ? 'bg-purple-600 text-white'
                       : 'bg-gray-700 text-gray-200'
                   }`}

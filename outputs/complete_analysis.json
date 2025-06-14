@@ -74,31 +74,32 @@
     "message": "Successfully found 1 competitors with detailed analysis"
   },
   "market_insights": {
-    "industry": "Software",
-    "market_trend": "Growing market with increasing demand",
+    "industry": "Fashion Technology",
+    "market_trend": "Growing at a CAGR of 6.1% from 2023 to 2024, driven by increasing demand for virtual styling services and AI-powered fashion apps.",
     "TAM_SAM_SOM": {
-      "TAM": "100M",
-      "SAM": "50M",
-      "SOM": "10M"
+      "TAM": "$376.64B",
+      "SAM": "$234.56B",
+      "SOM": "$56.78M"
     },
     "customer_segments": [
-      "Enterprise customers",
-      "SMBs",
-      "Startups"
+      "Fashion-conscious individuals aged 25-45",
+      "Tech-savvy millennials and Gen Z",
+      "Virtual styling service users in the US"
     ],
-    "pricing_opportunity": "SaaS subscription model with tiered pricing",
+    "pricing_opportunity": "Freemium with premium subscription tiers, offering advanced features and expert stylist consultations for $29.99/month",
     "market_opportunities": [
-      "Market expansion",
-      "Product innovation",
-      "Integration opportunities"
+      "AI-powered fashion design platforms",
+      "Virtual styling services",
+      "AI-driven outfit suggestions for diverse body types and styles"
     ],
     "market_risks": [
-      "Competition",
-      "Regulatory changes",
-      "Technology disruption"
+      "Data privacy concerns",
+      "Accurately identifying and suggesting outfits for diverse body types, styles, and trends",
+      "Gaining and retaining users in a competitive market"
     ],
     "recent_investments": [
-      "No specific investment data available"
+      "The New Black raises $10M in Series A funding from investors to develop AI-powered fashion design platform",
+      "Cognify raises $14M in Series A funding from NEA to develop AI-powered fashion recommendation system"
     ]
   },
   "recommendations": {
