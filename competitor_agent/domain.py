@@ -5,6 +5,7 @@ import json
 import requests
 from competitor_agent.scraping_domain import main 
 from dotenv import load_dotenv, find_dotenv
+import threading
 
 load_dotenv(find_dotenv())
 
@@ -82,6 +83,15 @@ def load_final_result():
         print("❌ Error parsing final_result.json")
         return []
 
+def new_parallel_function():
+    """Placeholder for the new function to run in parallel."""
+    print("✨ Running new parallel function...")
+    # Add your code here for the function you want to run in parallel
+    # For demonstration, let's just sleep for a bit
+    # import time
+    # time.sleep(5)
+    print("✅ New parallel function finished.")
+
 # 🚀 MAIN - Modified to return complete scraped data
 def competitor_agent():
     file_path = r"outputs/startup_summary.json"
@@ -116,10 +126,19 @@ def competitor_agent():
     prompt2 = f"top {major_domain} companies tracxn india"
     prompt3 = f"top {domain_search} companies tracxn india"
     prompt4 = f"top {major_domain} startups f6s india"
+    prompt5 = f"{major_domain} sector venture capitalist shizune india"
+    prompt6 = f"{major_domain} sector angel investors shizune india"
 
     try:
-        # Run the scraping process
+        # Create and start a thread for the new parallel function
+        parallel_thread = threading.Thread(target=new_parallel_function)
+        parallel_thread.start()
+
+        # Run the scraping process in the main thread
         main(prompt1, prompt2, prompt3, prompt4)  # This will create final_result.json
+        
+        # Wait for the parallel thread to complete
+        parallel_thread.join()
         
         # Load the complete results without transformation
         final_result_data = load_final_result()
