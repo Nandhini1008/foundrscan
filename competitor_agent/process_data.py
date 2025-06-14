@@ -22,7 +22,8 @@ def load_json_objects(filename: str) -> List[dict]:
 
 def process_competitor(company: dict, valuation_scores: dict) -> dict:
     """Process a single competitor's data."""
-    if company['company_name'] in valuation_scores:
+    # Ensure 'company_name' exists before proceeding
+    if 'company_name' in company and company['company_name'] in valuation_scores:
         company['valuation_score'] = valuation_scores[company['company_name']]
         return company
     return None
@@ -31,51 +32,31 @@ def final():
     """Process and combine competitor analysis results efficiently."""
     # Load and flatten all competitors from concatenated JSON objects
     competitor_analysis_objs = load_json_objects('competitor_analysis_result.json')
+    print(f"DEBUG: competitor_analysis_objs loaded: {len(competitor_analysis_objs)} objects")
     all_competitors = []
     for obj in competitor_analysis_objs:
         if 'competitors' in obj:
             all_competitors.extend(obj['competitors'])
+    print(f"DEBUG: all_competitors (flattened): {len(all_competitors)} entries")
 
     # Create valuation scores mapping (use 0 if not present)
     valuation_scores = {
         comp['name']: comp.get('valuation_score', 0)
         for comp in all_competitors
     }
+    print(f"DEBUG: valuation_scores created: {len(valuation_scores)} entries")
 
-    # Load final_output.json (standard array)
-    with open('final_output.json', 'r') as f:
-        final_output = json.load(f)
     print("phase 1")
-    # Process competitors in parallel
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [
-            executor.submit(process_competitor, company, valuation_scores)
-            for company in final_output
-        ]
-        combined_results = [
-            future.result() for future in concurrent.futures.as_completed(futures)
-            if future.result() is not None
-        ]
 
     # Sort results by valuation score
-    combined_results.sort(key=lambda x: float(x.get('valuation_score', 0) or 0), reverse=True)
+    all_competitors.sort(key=lambda x: float(x.get('valuation_score', 0) or 0), reverse=True)
 
     # Filter companies with feature_score > 1
-    filtered_results = [company for company in combined_results if float(company.get('feature_score', 0) or 0) > 1]
+    filtered_results = [company for company in all_competitors if float(company.get('feature_score', 0) or 0) > 0]
+    print(f"DEBUG: filtered_results after feature_score > 0 filter: {len(filtered_results)} entries")
 
     # Sort results by feature_score in descending order
     filtered_results.sort(key=lambda x: float(x.get('feature_score', 0) or 0), reverse=True)
-
-    # Write results
-    if not filtered_results:
-        quote = {
-            "message": "No competitors found! Remember: 'The only competition you have is with yourself. Keep innovating and having fun!'"
-        }
-        with open('final_result.json', 'w') as f:
-            json.dump(quote, f, indent=2)
-    else:
-        with open('final_result.json', 'w') as f:
-            json.dump(filtered_results, f, indent=2)
     copy_matching_companies()
 
 def is_details_nonempty(details):
@@ -136,4 +117,7 @@ def copy_matching_companies():
 
     # Write the matching companies to final_result.json
     with open('final_result.json', 'w') as f:
-        json.dump(matching_companies, f, indent=2) 
+        print("Got the results")
+        json.dump(matching_companies, f, indent=2)
+
+

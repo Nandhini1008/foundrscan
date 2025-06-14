@@ -4,10 +4,13 @@ import os
 import json
 import requests
 from competitor_agent.scraping_domain import main 
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 LLM_API_URL = "https://api.together.xyz/v1/chat/completions"
 HEADERS = {
-    "Authorization": "Bearer 542255a9ab6e90c86b0bace418f9d0185b0f989c539e7cc1387232144757ed71",
+    "Authorization": f"Bearer {os.environ.get("TOGETHER_API_KEY2")}",
     "Content-Type": "application/json"
 }
 
@@ -100,6 +103,9 @@ def competitor_agent():
     domain_search = domain_info.get('domain_search', major_domain)
     best_title = domain_info.get('best_title', domain_name)
 
+    if(domain_search.lower() == "unknown"):
+        major_domain = domain_name
+        domain_search = domain_name
     print(f"📂 File: {file_path}")
     print(f"🔍 Detected Major Domain: {major_domain}")
     print(f"🔍 Detected Search Domain: {domain_search}")

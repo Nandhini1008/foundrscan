@@ -13,18 +13,20 @@ from competitor_agent.integrate_llm import main2
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from competitor_agent.process_data import final
 from tavily import TavilyClient
+from dotenv import load_dotenv, find_dotenv
+import os
+load_dotenv(find_dotenv())
 
-SCRAPERAPI_KEY = "35980585e6d064d45abb0bd5a3d32e39"
+
 GOOGLE_API_KEY = ""
 GOOGLE_CSE_ID = ""
-TAVILY_API_KEY = "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" # Placeholder - user should replace with their actual key
-
+scraper_api = os.environ.get("SCRAPERAPI_KEY")
 output_data = []
 
 # 💥 Step 1: Google Search with ScraperAPI
 def scraperapi_search(query, GOOGLE_API_KEY, GOOGLE_CSE_ID):
     search_url = f"https://www.googleapis.com/customsearch/v1?q={query}&key={GOOGLE_API_KEY}&cx={GOOGLE_CSE_ID}"
-    proxies = {"http": f"http://scraperapi:{SCRAPERAPI_KEY}@proxy-server.scraperapi.com:8001"}
+    proxies = {"http": f"http://scraperapi:{scraper_api}@proxy-server.scraperapi.com:8001"}
     print(f"🔍 Searching via Google: {query}")
     try:
         response = requests.get(search_url, proxies=proxies)
@@ -38,7 +40,7 @@ def scraperapi_search(query, GOOGLE_API_KEY, GOOGLE_CSE_ID):
         if e.response.status_code == 429:
             print(f"⚠️ Google Search (ScraperAPI) returned 429. Falling back to Tavily API...")
             try:
-                client = TavilyClient(api_key=TAVILY_API_KEY)
+                client = TavilyClient(api_key=os.environ.get("TAVILY_API_KEY"))
                 tavily_results = client.search(
                     query=query,
                     search_depth="basic",
@@ -66,14 +68,14 @@ def get_company_names_from_url(url):
     print(f"🕸️ Crawling first URL for companies: {url}")
     soup = None
     try:
-        api_url = f"http://api.scraperapi.com?api_key={SCRAPERAPI_KEY}&url={url}"
+        api_url = f"http://api.scraperapi.com?api_key={scraper_api}&url={url}"
         response = requests.get(api_url)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
     except Exception as e:
         print(f"⚠️ ScraperAPI failed for {url} with error: {e}. Falling back to TavilyClient.extract...")
         try:
-            client = TavilyClient(api_key=TAVILY_API_KEY)
+            client = TavilyClient(api_key=os.environ.get("TAVILY_API_KEY"))
             extract_response = client.extract(urls=[url])
             if extract_response and 'content' in extract_response:
                 soup = BeautifulSoup(extract_response['content'], 'html.parser')
@@ -194,14 +196,14 @@ def extract_company_names_from_url(url):
     print(f"🕸️ Crawling via ScraperAPI: {url}")
     soup = None
     try:
-        api_url = f"http://api.scraperapi.com?api_key={SCRAPERAPI_KEY}&url={url}"
+        api_url = f"http://api.scraperapi.com?api_key={scraper_api}&url={url}"
         response = requests.get(api_url)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
     except Exception as e:
         print(f"⚠️ ScraperAPI failed for {url} with error: {e}. Falling back to TavilyClient.extract...")
         try:
-            client = TavilyClient(api_key=TAVILY_API_KEY)
+            client = TavilyClient(api_key=os.environ.get("TAVILY_API_KEY"))
             extract_response = client.extract(urls=[url])
             if extract_response and 'content' in extract_response:
                 soup = BeautifulSoup(extract_response['content'], 'html.parser')
@@ -281,8 +283,8 @@ def main(primary_prompt, secondary_prompt, third_prompt, fourth_prompt):
         json.dump([], f)
     with open("competitor_analysis_result.json", 'w', encoding='utf-8') as f1:
         json.dump([], f1)
-    GOOGLE_API_KEY = "AIzaSyBJ0TM9Rs73RvK2akpesypWZIvgYdc_aQQ"
-    GOOGLE_CSE_ID = "0436fecd901594865"
+    GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY4")
+    GOOGLE_CSE_ID = os.environ.get("GOOGLE_CSE_ID7")
     search_url = scraperapi_search(primary_prompt, GOOGLE_API_KEY, GOOGLE_CSE_ID)
     print(f"DEBUG: Primary Search URL: {search_url}")
     if not search_url:
@@ -315,17 +317,17 @@ def main(primary_prompt, secondary_prompt, third_prompt, fourth_prompt):
     output_data = []
     # Define API keys and CSE IDs
     api_keys = [
-        "AIzaSyB8wQpkh34DyemOFGHUwEjlueoWkeEVS8c",# api1
-        "AIzaSyCL-bUJvm3Ogl7PMGju3kD7u7fN-MODyfM", #api2
-        "AIzaSyCabKX66OW1m7B8UnnwYwSJd4FGQfaDTwU"  # api3
+        os.environ.get("GOOGLE_API_KEY1"),
+        os.environ.get("GOOGLE_API_KEY2"),
+        os.environ.get("GOOGLE_API_KEY3")
     ]
     cse_ids = [
-        "b3ee74b6f109d4785",  # cse1 for api1
-        "42eb1d25454e645a8",  # cse2 for api1
-        "a1b28e802924c4f19",# cse1 for api2
-        "20fb97ef555d749c7",  # cse2 for api2
-        "b47601a1bd9d447a5", # cse1 for api3
-        "a103b097949ad4886"  # cse2 for api3
+        os.environ.get("GOOGLE_CSE_ID1"),
+        os.environ.get("GOOGLE_CSE_ID2"),
+        os.environ.get("GOOGLE_CSE_ID3"),
+        os.environ.get("GOOGLE_CSE_ID4"),
+        os.environ.get("GOOGLE_CSE_ID5"),
+        os.environ.get("GOOGLE_CSE_ID6")
     ]
     api_cse_pairs = [
         (api_keys[0], cse_ids[0]),  # api1 + cse1
@@ -350,6 +352,7 @@ def main(primary_prompt, secondary_prompt, third_prompt, fourth_prompt):
         print(f"🤖 Sending company {i+1}/{len(output_data)} to LLM...")
         asyncio.run(main2([company_data]))
     save_json(output_data)
+    print("DEBUG: Calling final() from scraping_domain.py")
     final()
     print(f"✅ All companies processed and saved.")
 

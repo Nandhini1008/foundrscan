@@ -2,6 +2,13 @@ import json
 import textwrap
 from typing import Dict, List, Any
 from together import Together
+import os
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+
+TOGETHER_API_KEY = os.environ.get("TOGETHER_API_KEY2")
+
 
 
 def clean_json_to_text(data: Any, title="") -> str:
@@ -34,7 +41,7 @@ def clean_json_to_text(data: Any, title="") -> str:
 
 def load_json_files() -> Dict:
     try:
-        path1 = r"C:\Users\niran\Desktop\foundrscan\agents\output\startup_summary.json"
+        path1 = r"outputs/startup_summary.json"
         with open(path1, 'r', encoding='utf-8') as f:
             startup_data = json.load(f)
         return startup_data
@@ -104,7 +111,8 @@ def prepare_optimized_prompt(startup_data: Dict, competitor_data: Dict) -> List[
         You MUST follow the exact JSON structure provided.
         You MUST give a feature score for each competitor companies that match with the startup features. 
         Make sure to give a score between 0-10. Also give the score only if the competitor company features match with the startup features.
-        If most of the features doesn't match with the startup features then give feature score as 0.        Add the feature score in the key "feature_score" in the competitors array.
+        One and Only if many of the features doesn't match with the startup features then give feature score as 0 else provide the score.
+        Provide the feature score if their idealogy matches but the score must be around 1-3.
         The feature score should be different for each competitor company.
         You MUST NOT return any text before or after the JSON object.
         You MUST include all the competitors with the feature score greater than 0 in the competitors array.
@@ -158,7 +166,7 @@ IMPORTANT:
 5. Do not add any comments or explanations
 6. Do not include any markdown formatting
 7. The output must be valid JSON that can be parsed by json.loads().
-8. Include all the competitors with the feature score greater than 3 in the competitors array.
+8. Include all the competitors with the feature score greater than 0 in the competitors array.
 10. Sort competitors by funding amount in descending order
 11. Do not include any empty strings or null values
 12. All fields must contain actual data from the input
@@ -167,7 +175,8 @@ IMPORTANT:
 16. Keep descriptions and features concise to stay within token limits
 17. Make sure to give a feature score between 0-10 for each competitor company based on the similarity of the features. 
 18. Make sure to give a valution score between 0-100 for each competitor company based all the details provided.
-19.If most of the features doesn't match with the startup features then give feature score as 0."""
+19. One and Only if many of the features doesn't match with the startup features then give feature score as 0 else provide the score.
+20. Provide the feature score if their idealogy matches but the score must be around 1-3."""
     }
     return [system_message, user_message]
 
@@ -179,8 +188,8 @@ def is_valid_json(text: str) -> bool:
         return False
 
 def analyze_with_llm(messages: List[Dict], max_retries: int = 2) -> str:
-    TOGETHER_API_KEY = "542255a9ab6e90c86b0bace418f9d0185b0f989c539e7cc1387232144757ed71"
-    client = Together(api_key=TOGETHER_API_KEY)
+    
+    client = Together()
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
@@ -239,6 +248,3 @@ async def main2(output_data):
         save_analysis_result(result)
     else:
         print("❌ Failed to generate valid JSON analysis")
-
-if __name__ == "__main__":
-    main2()
