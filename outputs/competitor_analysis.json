@@ -1,5 +1,48 @@
 {
-  "competitors": [],
-  "status": "no_data",
-  "message": "No competitor data was found or scraped"
+  "competitors": [
+    {
+      "company_name": "YOLOgram Style",
+      "searched_url": "https://pitchbook.com/profiles/company/507313-81",
+      "details": {
+        "Year Founded": "2022",
+        "Status": "Private",
+        "Latest Deal Type": "Accelerator/â€‹Inc",
+        "Investors": "1",
+        "Description": "Developer of an avatar fashion application intended to enhance apparel e-commerce discovery and experience. The company offers playable styling that empowers the consumer to unlock the stylist in them by mixing, matching, and customizing apparel, it merges playable styling and immersive storytelling with social AR stories, enabling virtual influencers with avatars and co-create branded content with the apparel brands.",
+        "Website": "www.yologram.com",
+        "Ownership Status": "Privately Held (backing)",
+        "Financing Status": "Accelerator/Incubator Backed",
+        "Primary Industry": "Social/Platform Software",
+        "Other Industries": "Media and Information Services (B2B)",
+        "Vertical(s)": "Augmented Reality,\nMobile",
+        "Address": [
+          "B-26 Greater Kailash - 1",
+          "South Delhi",
+          "New Delhi, 110048",
+          "India"
+        ],
+        "Social Media": {
+          "LinkedIn": "https://www.linkedin.com/company/yologram"
+        },
+        "Industries": [
+          "Social/Platform Software"
+        ],
+        "Verticals": [
+          "www.yologram.com",
+          "Augmented Reality",
+          "Mobile"
+        ],
+        "When was YOLOgram founded?": "YOLOgram was founded in 2022.",
+        "Where is YOLOgram headquartered?": "YOLOgram is headquartered in New Delhi, India.",
+        "What industry is YOLOgram in?": "YOLOgramâ€™s primary industry is Social/Platform Software.",
+        "Is YOLOgram a private or public company?": "YOLOgram is a Private company.",
+        "What is YOLOgramâ€™s current revenue?": "The current revenue for YOLOgram is .",
+        "Who are YOLOgramâ€™s investors?": "Newmoon Accelerator has invested in YOLOgram.",
+        "Who are YOLOgramâ€™s competitors?": "Drest (Entertainment Software) and DressX are competitors of YOLOgram."
+      }
+    }
+  ],
+  "status": "success",
+  "competitor_count": 1,
+  "message": "Successfully found 1 competitors with detailed analysis"
 }

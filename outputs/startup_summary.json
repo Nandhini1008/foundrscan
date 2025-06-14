@@ -1,26 +1,26 @@
 {
-  "title": "AI-Powered Diabetes Care Platform",
-  "description": "An AI-powered platform that monitors users' conditions and suggests personalized treatment plans for diabetes care, using data from continuous glucose monitoring and manual user inputs, with automated suggestions reviewed and updated by an in-house medical team",
+  "title": "AI-Powered Personal Stylist App",
+  "description": "An app that curates outfits based on users' existing wardrobes, weather, and calendar events using AI technology.",
   "target_users": [
-    "people with diabetes",
-    "healthcare providers"
+    "fashion-conscious individuals aged 25-45",
+    "tech-savvy millennials and Gen Z"
   ],
-  "problem": "Ineffective diabetes management and lack of personalized treatment plans",
-  "solution": "AI-powered monitoring and personalized treatment suggestions, with automated insights and recommendations",
+  "problem": "Users struggle with finding the right outfits based on their wardrobe, weather, and schedule.",
+  "solution": "An AI-powered app that analyzes users' wardrobes, weather conditions, and calendar events to suggest outfits.",
   "tech_stack": [
     "AI",
     "machine learning",
-    "cloud services",
-    "binary encryption"
+    "photo scanning",
+    "drag-and-drop interface"
   ],
-  "business_model": "Subscription-based model with corporate agreements",
-  "monetization": "Monthly and yearly subscription fees, with potential partnerships with healthcare providers",
-  "competition": "Other digital health platforms and traditional diabetes management solutions",
-  "differentiator": "AI-powered personalized treatment suggestions and automated monitoring",
+  "business_model": "Freemium with premium subscription tiers",
+  "monetization": "Primary revenue from premium subscription tiers offering advanced features and expert stylist consultations",
+  "competition": "Other styling apps and services",
+  "differentiator": "Real-time, AI-driven outfit suggestions tailored to individual users' wardrobe inventory, hyper-localized trend analysis, personal style evolution, and a style sustainability score",
   "risks": [
-    "regulatory risks",
-    "data security risks",
-    "reliance on cloud infrastructure"
+    "Data privacy concerns",
+    "Accurately identifying and suggesting outfits for diverse body types, styles, and trends",
+    "Gaining and retaining users"
   ],
-  "vision": "To improve the lives of people with diabetes through innovative, AI-powered care solutions, with a long-term goal of listing as a public company through an IPO"
+  "vision": "To become a leading AI-powered personal stylist app for fashion-conscious individuals globally, promoting inclusivity, ethical business practices, and cutting-edge technology"
 }
